@@ -1,15 +1,16 @@
-package entity.notMoveable;
+package entity.Creature;
 
 
 import entity.Coordinates;
+import entity.Entity;
 
 //трава - ресурс для травоядных
-public class Grass extends CreatureNotMoveable {
+public class Grass extends Entity {
 
     public Coordinates coordinates;
 
     public Grass(Coordinates coordinates) {
-        super(coordinates);
+        this.coordinates = coordinates;
     }
 
     public Coordinates getCoordinates() {

@@ -1,17 +1,13 @@
-package entity.notMoveable;
+package entity.Creature;
 
 
 import entity.Coordinates;
+import entity.Entity;
 
 //дерево - неподвижный объект.
-public class Tree extends CreatureNotMoveable {
+public class Tree extends Entity {
 
-
-    public Coordinates coordinates;
-
-    public Tree(Coordinates coordinates) {
-        super(coordinates);
-    }
+    private Coordinates coordinates;
 
     public Coordinates getCoordinates() {
         return coordinates;
@@ -20,6 +16,13 @@ public class Tree extends CreatureNotMoveable {
     public void setCoordinates(Coordinates coordinates) {
         this.coordinates = coordinates;
     }
+
+    public Tree(Coordinates coordinates) {
+        this.coordinates = coordinates;
+    }
+
+
+
 
 
 
