@@ -5,10 +5,11 @@ import entity.Creature.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
-public class GameBoard {
+public class GameBoard{
 
 
     public HashMap<Coordinates, Entity> getCoordinatesEntityMap() {
@@ -38,15 +39,12 @@ public class GameBoard {
 
     public void setNewEntityForMap(){
         coordinatesEntityMap.put(new Coordinates(3, 3), new Herbivore(new Coordinates(3, 3),1, 10));
-//        setEntity(new Coordinates(2, 1), new Grass(new Coordinates(2, 1)));
-//        setEntity(new Coordinates(0, 3), new Tree(new Coordinates(0, 3)));
-
         coordinatesEntityMap.put(new Coordinates(2, 2), new Predator(new Coordinates(2, 2), 10, 3, 4));
         coordinatesEntityMap.put(new Coordinates(1, 2), new Tree(new Coordinates(1, 2)));
     }
 
 
-    public ArrayList<Coordinates> getBoards(){
+    public List<Coordinates> getBoards(){
         ArrayList<Coordinates> listAllCoordinates = new ArrayList<>();
         for(int column = 0; column < getMaxColumn(); column++){
             for(int row = 0; row < getMaxRow(); row++) {
@@ -57,8 +55,16 @@ public class GameBoard {
         return  listAllCoordinates;
     }
 
-
-
+    public <T extends Entity> List<T> getEntities(Class<T> entityType) {
+        List<T> result = new ArrayList<>();
+        for (Map.Entry<Coordinates, Entity> entry : getCoordinatesEntityMap().entrySet()) {
+            Entity entity = entry.getValue();
+            if (entityType.isInstance(entity)) {
+                result.add(entityType.cast(entity));
+            }
+        }
+        return result;
+    }
 
 
     //       COLUMN
