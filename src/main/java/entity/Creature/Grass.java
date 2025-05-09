@@ -7,7 +7,7 @@ import entity.Entity;
 //трава - ресурс для травоядных
 public class Grass extends Entity {
 
-    public Coordinates coordinates;
+    private Coordinates coordinates;
 
     public Grass(Coordinates coordinates) {
         this.coordinates = coordinates;

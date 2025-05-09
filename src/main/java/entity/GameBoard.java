@@ -38,9 +38,10 @@ public class GameBoard{
     }
 
     public void setNewEntityForMap(){
-        coordinatesEntityMap.put(new Coordinates(3, 3), new Herbivore(new Coordinates(3, 3),1, 10));
-        coordinatesEntityMap.put(new Coordinates(2, 2), new Predator(new Coordinates(2, 2), 10, 3, 4));
-        coordinatesEntityMap.put(new Coordinates(1, 2), new Tree(new Coordinates(1, 2)));
+//        coordinatesEntityMap.put(new Coordinates(3, 3), new Herbivore(new Coordinates(3, 3),1, 10));
+        coordinatesEntityMap.put(new Coordinates(3, 3), new Predator(new Coordinates(3, 3), 10, 3, 10));
+        coordinatesEntityMap.put(new Coordinates(0, 1), new Herbivore(new Coordinates(0, 1), 5, 2));
+        coordinatesEntityMap.put(new Coordinates(1, 2), new Herbivore(new Coordinates(1, 2),20,2));
     }
 
 
@@ -66,12 +67,17 @@ public class GameBoard{
         return result;
     }
 
+    public Entity getEntityAt(Coordinates current) {
+        return getCoordinatesEntityMap().get(current);
+
+    }
+
 
     //       COLUMN
 //          0 1 2 3 4
 //        0 * * * * *
 //        1 * * * * *
-//   ROW  2 * * P * *
+//   ROW  2 * G * * *
 //        3 * * * H *
 //        4 * * * * *
 //

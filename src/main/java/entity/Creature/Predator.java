@@ -30,63 +30,33 @@ public class Predator extends Creature {
 
     @Override
     public void makeMove(GameBoard gameBoard) {
-
-        Herbivore nearestHerbivore = findNearestHerbivore(gameBoard);
-
-        if (nearestHerbivore == null) {
-            return;
+        List<Coordinates> pathToFood = new PathFinder(gameBoard).searchFood(getCoordinates(), Herbivore.class);
+        if (!pathToFood.isEmpty()) {
+            moveAlongPath(gameBoard, pathToFood);
         }
-
-        Coordinates predatorCoordinates = getCoordinates();
-        Coordinates herbivoreCoordinates = nearestHerbivore.getCoordinates();
-
-
-        PathFinder pathFinder = new PathFinder(gameBoard);
-        List<Coordinates> pathToHerbivore = pathFinder.searchFood(predatorCoordinates, herbivoreCoordinates);
-
-
-        moveAlongPath(gameBoard, pathToHerbivore, predatorCoordinates, herbivoreCoordinates);
     }
 
-    private Herbivore findNearestHerbivore(GameBoard gameBoard) {
-        List<Herbivore> herbivores = gameBoard.getEntities(Herbivore.class);
-        Herbivore nearestHerbivore = null;
-        double minDistance = Double.MAX_VALUE;
-
-        for (Herbivore herbivore : herbivores) {
-            double distance = calculateDistance(getCoordinates(), herbivore.getCoordinates());
-            if (distance < minDistance) {
-                minDistance = distance;
-                nearestHerbivore = herbivore;
-            }
-        }
-
-        return nearestHerbivore;
-    }
-
-    private void moveAlongPath(GameBoard gameBoard, List<Coordinates> pathToHerbivore, Coordinates predatorCoordinates, Coordinates herbivoreCoordinates) {
+    private void moveAlongPath(GameBoard gameBoard, List<Coordinates> pathToHerbivore) {
         int steps = getSpeed();
-        Entity entityOnCurrentCoordinates;
 
-        for (Coordinates nextStep : pathToHerbivore) {
-            entityOnCurrentCoordinates = gameBoard.getCoordinatesEntityMap().get(nextStep);
+        for (int i = 0; i < pathToHerbivore.size(); i++) {
+            Coordinates nextStep = pathToHerbivore.get(i);
+            Entity entityAtNextStep = gameBoard.getEntityAt(nextStep);
 
             if (steps <= 0) break;
 
-
-            if ((entityOnCurrentCoordinates instanceof Tree) || (entityOnCurrentCoordinates instanceof Rock)) {
+            if (entityAtNextStep instanceof Tree || entityAtNextStep instanceof Rock) {
                 steps -= 2;
                 continue;
             }
 
-
-            if (readyForAttack(nextStep, pathToHerbivore) && (steps >= 1)) {
-                attackThisFood(gameBoard, predatorCoordinates, herbivoreCoordinates);
+            // Если на клетке травоядное – атака
+            if (entityAtNextStep instanceof Herbivore && steps >= 1) {
+                attackThisFood(gameBoard, nextStep); // nextStep – координаты жертвы
                 break;
             }
 
-            // Перемещаем хищника на следующую клетку
-            gameBoard.getCoordinatesEntityMap().remove(predatorCoordinates);
+            gameBoard.getCoordinatesEntityMap().remove(getCoordinates());
             setCoordinates(nextStep);
             gameBoard.getCoordinatesEntityMap().put(nextStep, this);
 
@@ -98,22 +68,28 @@ public class Predator extends Creature {
         return current.equals(pathList.get(pathList.size() - 1));
     }
 
-    private void attackThisFood(GameBoard gameBoard, Coordinates predatorCoordinates, Coordinates herbivoreCoordinates) {
-        Predator predator = (Predator) gameBoard.getCoordinatesEntityMap().get(predatorCoordinates);
-        Herbivore herbivore = (Herbivore) gameBoard.getCoordinatesEntityMap().get(herbivoreCoordinates);
+    private void attackThisFood(GameBoard gameBoard, Coordinates herbivoreCoordinates) {
+        Herbivore herbivore = (Herbivore) gameBoard.getEntityAt(herbivoreCoordinates);
 
-        if (herbivore.getHealth() - predator.getAttackPower() <= 0) {
+        if (herbivore == null) return;
+
+        if (herbivore.getHealth() - getAttackPower() <= 0) {
             gameBoard.getCoordinatesEntityMap().remove(herbivoreCoordinates);
-            gameBoard.getCoordinatesEntityMap().remove(predatorCoordinates);
-            predator.setCoordinates(herbivoreCoordinates);
-            gameBoard.getCoordinatesEntityMap().put(herbivoreCoordinates, predator);
+            gameBoard.getCoordinatesEntityMap().remove(getCoordinates());
+            setCoordinates(herbivoreCoordinates);
+            gameBoard.getCoordinatesEntityMap().put(herbivoreCoordinates, this);
         } else {
-            herbivore.setHealth(herbivore.getHealth() - predator.getAttackPower());
+            herbivore.setHealth(herbivore.getHealth() - getAttackPower());
         }
     }
 
-    private double calculateDistance(Coordinates start, Coordinates end) {
-        return Math.sqrt(Math.pow(end.getRow() - start.getRow(), 2) + Math.pow(end.getColumn() - start.getColumn(), 2));
-    }
 }
 
+//            COLUMN
+//          0 1 2 3 4
+//        0 * * * * *
+//        1 H * * * *    {2,3} {2,2}  {1,2} {3,3}
+//   ROW  2 * H * * *
+//        3 * * * P *
+//        4 * * * * *
+//
