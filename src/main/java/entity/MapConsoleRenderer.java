@@ -6,9 +6,6 @@ import entity.Creature.Tree;
 
 public class MapConsoleRenderer {
 
-
-
-
     private final GameBoard gameBoard;
 
     public MapConsoleRenderer(GameBoard gameBoard) {
@@ -24,11 +21,6 @@ public class MapConsoleRenderer {
             System.out.println(line);
         }
     }
-
-    //1 3
-//    1 2
-//    1 4
-
 
     private String colorizeAndGetSpriteForEntity(Coordinates coordinates){
         //format = background color + font color + text (ANSI COLORS)
@@ -47,9 +39,6 @@ public class MapConsoleRenderer {
         return  "";
         }
     }
-
-
-
 
 
 //    private String getSpriteForMap(Coordinates coordinates){

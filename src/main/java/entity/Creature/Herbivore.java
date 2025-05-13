@@ -4,10 +4,8 @@ import entity.Coordinates;
 import entity.Entity;
 import entity.GameBoard;
 import entity.PathFinder;
-
 import java.util.List;
 import java.util.Map;
-
 
 public class Herbivore extends Creature {
 

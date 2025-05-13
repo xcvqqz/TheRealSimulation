@@ -11,12 +11,7 @@ import java.util.Map;
 
 public class GameBoard{
 
-
-    public HashMap<Coordinates, Entity> getCoordinatesEntityMap() {
-        return coordinatesEntityMap;
-    }
-
-    private HashMap<Coordinates, Entity> coordinatesEntityMap = new HashMap<>();
+    private final HashMap<Coordinates, Entity> coordinatesEntityMap = new HashMap<>();
     private final int maxColumn;
     private final int maxRow;
 
@@ -25,10 +20,12 @@ public class GameBoard{
             this.maxRow = maxRow;
     }
 
+    public HashMap<Coordinates, Entity> getCoordinatesEntityMap() {
+        return coordinatesEntityMap;
+    }
     public int getMaxColumn() {
         return maxColumn;
     }
-
     public int getMaxRow() {
         return maxRow;
     }
@@ -36,14 +33,6 @@ public class GameBoard{
     public boolean coordinateIsNotEmpty(Coordinates coordinates){
         return coordinatesEntityMap.containsKey(coordinates);
     }
-
-    public void setNewEntityForMap(){
-//        coordinatesEntityMap.put(new Coordinates(3, 3), new Herbivore(new Coordinates(3, 3),1, 10));
-        coordinatesEntityMap.put(new Coordinates(3, 3), new Predator(new Coordinates(3, 3), 10, 3, 10));
-        coordinatesEntityMap.put(new Coordinates(0, 1), new Herbivore(new Coordinates(0, 1), 5, 2));
-        coordinatesEntityMap.put(new Coordinates(1, 2), new Herbivore(new Coordinates(1, 2),20,2));
-    }
-
 
     public List<Coordinates> getBoards(){
         ArrayList<Coordinates> listAllCoordinates = new ArrayList<>();
@@ -69,21 +58,5 @@ public class GameBoard{
 
     public Entity getEntityAt(Coordinates current) {
         return getCoordinatesEntityMap().get(current);
-
     }
-
-
-    //       COLUMN
-//          0 1 2 3 4
-//        0 * * * * *
-//        1 * * * * *
-//   ROW  2 * G * * *
-//        3 * * * H *
-//        4 * * * * *
-//
-
-
-
-
-
 }
