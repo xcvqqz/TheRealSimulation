@@ -1,3 +1,4 @@
+import actions.MoveAction;
 import actions.SpawnAction;
 import entity.Coordinates;
 import entity.Creature.Predator;
@@ -10,9 +11,15 @@ public class Main {
 
     public static void main(String[] args) {
 
-        GameBoard gameBoard = new GameBoard(10,10);
+        GameBoard gameBoard = new GameBoard(5,5);
 
-       new SpawnAction(gameBoard).execute();
+        new SpawnAction(gameBoard).execute();
+       MoveAction moveAction = new MoveAction(gameBoard);
+       moveAction.execute();
+        moveAction.execute();
+        moveAction.execute();
+        moveAction.execute();
+
 
 
         int x = 123;

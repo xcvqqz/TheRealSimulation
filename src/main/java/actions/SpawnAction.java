@@ -9,7 +9,7 @@ import entity.GameBoard;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SpawnAction extends Actions {
+public class SpawnAction extends Action {
 
     private GameBoard gameBoard;
     private ArrayList<Entity> entityList;

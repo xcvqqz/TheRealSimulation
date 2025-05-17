@@ -13,22 +13,12 @@ public class Coordinates {
         this.row = row;
     }
 
-
-
     public int getColumn() {
         return column;
     }
 
     public int getRow() {
         return row;
-    }
-
-    @Override
-    public String toString() {
-        return "Coordinates{" +
-                "column=" + column +
-                ", row=" + row +
-                '}';
     }
 
     @Override
@@ -47,12 +37,11 @@ public class Coordinates {
         return result;
     }
 
-
-
-    public boolean readyForAttack(List<Coordinates> allPathList){
-        return this.equals(allPathList.get(allPathList.size()-2));
+    @Override
+    public String toString() {
+        return "Coordinates{" +
+                "column=" + column +
+                ", row=" + row +
+                '}';
     }
-
-
-
 }

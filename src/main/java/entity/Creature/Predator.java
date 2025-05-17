@@ -64,10 +64,6 @@ public class Predator extends Creature {
         }
     }
 
-    private boolean readyForAttack(Coordinates current, List<Coordinates> pathList) {
-        return current.equals(pathList.get(pathList.size() - 1));
-    }
-
     private void attackThisFood(GameBoard gameBoard, Coordinates herbivoreCoordinates) {
         Herbivore herbivore = (Herbivore) gameBoard.getEntityAt(herbivoreCoordinates);
 
@@ -84,12 +80,3 @@ public class Predator extends Creature {
     }
 
 }
-
-//            COLUMN
-//          0 1 2 3 4
-//        0 * * * * *
-//        1 H * * * *    {2,3} {2,2}  {1,2} {3,3}
-//   ROW  2 * H * * *
-//        3 * * * P *
-//        4 * * * * *
-//
