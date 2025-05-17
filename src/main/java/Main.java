@@ -8,21 +8,9 @@ import entity.Creature.Grass;
 
 public class Main {
 
-
     public static void main(String[] args) {
 
-        GameBoard gameBoard = new GameBoard(5,5);
-
-        new SpawnAction(gameBoard).execute();
-       MoveAction moveAction = new MoveAction(gameBoard);
-       moveAction.execute();
-        moveAction.execute();
-        moveAction.execute();
-        moveAction.execute();
-
-
-
-        int x = 123;
+        System.out.println("ghbdtn");
     }
 }
 
