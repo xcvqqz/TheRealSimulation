@@ -56,6 +56,18 @@ public class GameBoard{
         return result;
     }
 
+
+        public void setNewEntityForMap(){
+        coordinatesEntityMap.put(new Coordinates(3,8),new Rock(new Coordinates(3,8)));
+        coordinatesEntityMap.put(new Coordinates(6, 4), new Tree(new Coordinates(6, 4)));
+        coordinatesEntityMap.put(new Coordinates(8, 8), new Grass(new Coordinates(8, 8)));
+//        coordinatesEntityMap.put(new Coordinates(2, 5), new Grass(new Coordinates(2, 5)));
+        coordinatesEntityMap.put(new Coordinates(1, 5), new Predator(new Coordinates(1, 5), 10, 3, 3));
+        coordinatesEntityMap.put(new Coordinates(1, 3), new Herbivore(new Coordinates(1, 3), 6, 3));
+//        coordinatesEntityMap.put(new Coordinates(3, 2), new Herbivore(new Coordinates(3, 2),6,3));
+    }
+
+
     public Entity getEntityAt(Coordinates current) {
         return getCoordinatesEntityMap().get(current);
     }

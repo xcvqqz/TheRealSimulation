@@ -29,7 +29,9 @@ public class Herbivore extends Creature {
 
             if (steps <= 0) break;
 
-            if (entityAtNextStep instanceof Tree || entityAtNextStep instanceof Rock) {
+            if(entityAtNextStep instanceof Rock ||
+                    entityAtNextStep instanceof Tree ||
+                    entityAtNextStep instanceof Predator) {
                 steps -= 2;
                 continue;
             }

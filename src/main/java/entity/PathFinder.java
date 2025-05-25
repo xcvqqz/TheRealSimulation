@@ -18,8 +18,8 @@ public class PathFinder {
     }
 
     private boolean isValidateCoordinate(Coordinates coordinates) {
-        return ((coordinates.getRow() >= 0 && coordinates.getRow() < gameBoard.getMaxRow())
-                && (coordinates.getColumn() >= 0 && coordinates.getColumn() < gameBoard.getMaxColumn()));
+        return ((coordinates.getRow() >= 0 && coordinates.getRow() <= gameBoard.getMaxRow())
+                && (coordinates.getColumn() >= 0 && coordinates.getColumn() <= gameBoard.getMaxColumn()));
     }
 
     public <T extends Entity> List<Coordinates> searchFood(Coordinates start,  Class<T> typeOfEntity) {

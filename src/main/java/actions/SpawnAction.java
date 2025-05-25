@@ -46,6 +46,8 @@ public class SpawnAction extends Action {
         entityList.add(createEntity(Grass.class, coordinatesForEntity.get(2)));
         entityList.add(createEntity(Tree.class, coordinatesForEntity.get(3)));
         entityList.add(createEntity(Rock.class, coordinatesForEntity.get(4)));
+        entityList.add(createEntity(Herbivore.class, coordinatesForEntity.get(5)));
+        entityList.add(createEntity(Grass.class, coordinatesForEntity.get(6)));
     }
 
     private ArrayList<Coordinates> generateRandomCoordinatesForEntity() {
@@ -58,7 +60,7 @@ public class SpawnAction extends Action {
             if (!coordinatesForEntityList.contains(newCoordinates)) {
                 coordinatesForEntityList.add(newCoordinates);
             }
-            if (coordinatesForEntityList.size() > 5){
+            if (coordinatesForEntityList.size() > 10){
                 break;
             }
         }
@@ -67,7 +69,7 @@ public class SpawnAction extends Action {
 
      private <T extends Entity> Entity createEntity(Class<T> typeOfEntity, Coordinates coordinates) {
          return switch (typeOfEntity.getSimpleName()) {
-             case "Predator" -> new Predator(coordinates, 10, 2, 3);
+             case "Predator" -> new Predator(coordinates, 10, 3, 3);
              case "Herbivore" -> new Herbivore(coordinates, 6, 3);
              case "Grass" -> new Grass(coordinates);
              case "Tree" -> new Tree(coordinates);

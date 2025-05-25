@@ -28,11 +28,13 @@ public class MoveAction extends Action {
         creature.makeMove(gameBoard);
  }
 
+
     private Set<Creature> getAllCreature(){
         Set<Creature> allCreatures = new HashSet<>();
-        for(Map.Entry<Coordinates, Entity> creature : gameBoard.getCoordinatesEntityMap().entrySet()){
-            if(creature.getValue() instanceof Creature){
-                allCreatures.add((Creature) creature);
+        for(Map.Entry<Coordinates, Entity> entry : gameBoard.getCoordinatesEntityMap().entrySet()){
+            Entity entity = entry.getValue();
+            if(entity instanceof Creature){
+                allCreatures.add((Creature) entity);
             }
         }
         return allCreatures;

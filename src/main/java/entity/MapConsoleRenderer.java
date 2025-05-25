@@ -1,50 +1,44 @@
 package entity;
 
-import entity.Creature.Herbivore;
-import entity.Creature.Grass;
-import entity.Creature.Tree;
+import entity.Creature.*;
 
 public class MapConsoleRenderer {
 
+    private static final String GRASS = "\uD83C\uDF3F";
+    private static final String TREE = "\uD83C\uDF33";
+    private static final String ROCK = "⛰\uFE0F";
+    private static final String HERBIVORE = "\uD83E\uDD8C";
+    private static final String PREDATOR = "\uD83D\uDC3A";
+    private static final String GROUND = "\uD83D\uDFEB";
     private final GameBoard gameBoard;
 
-    public MapConsoleRenderer(GameBoard gameBoard) {
-        this.gameBoard = gameBoard;
-    }
+    public MapConsoleRenderer(GameBoard gameBoard) {this.gameBoard = gameBoard;}
 
     public void render(){
-        for(int column = 0; column < gameBoard.getMaxColumn(); column++){
-            String line = "";
-            for(int row = 0; row < gameBoard.getMaxRow(); row++) {
-                line += colorizeAndGetSpriteForEntity(new Coordinates(row, column));
+        for(int column = 0; column < gameBoard.getMaxColumn()+1; column++){
+            StringBuilder sb = new StringBuilder();
+            for(int row = 0; row < gameBoard.getMaxRow()+1; row++) {
+                sb.append(colorizeAndGetSpriteForEntity(new Coordinates(row, column)));
             }
-            System.out.println(line);
+            System.out.println(sb.toString());
         }
     }
 
-    private String colorizeAndGetSpriteForEntity(Coordinates coordinates){
-        //format = background color + font color + text (ANSI COLORS)
-
-            if(!gameBoard.coordinateIsNotEmpty(coordinates)){
-                 return "#";
-            }
-
-        if(gameBoard.getCoordinatesEntityMap().get(coordinates) instanceof Herbivore) {
-            return "H";
-        } if (gameBoard.getCoordinatesEntityMap().get(coordinates) instanceof Grass){
-            return "G";}
-        if(gameBoard.getCoordinatesEntityMap().get(coordinates) instanceof Tree){
-            return "T";}
-
-        return  "";
-        }
+    private String colorizeAndGetSpriteForEntity(Coordinates coordinates) {
+        Entity entity = gameBoard.getCoordinatesEntityMap().get(coordinates);
+        if (entity instanceof Herbivore) {
+            return HERBIVORE;}
+        if (entity instanceof Grass) {
+            return GRASS;}
+        if (entity instanceof Tree) {
+            return TREE;}
+        if(entity instanceof Predator){
+            return  PREDATOR;}
+        if(entity instanceof Rock){
+            return ROCK;}
+        return GROUND;
     }
-
-
-//    private String getSpriteForMap(Coordinates coordinates){
-//        return colorizeSprite(" ", entity.c);
-//    }
-
+}
 
 
 
