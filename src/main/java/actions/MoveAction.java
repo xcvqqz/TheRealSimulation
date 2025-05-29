@@ -2,12 +2,12 @@ package actions;
 
 import entity.Coordinates;
 import entity.Creature.Creature;
+import entity.Creature.Herbivore;
 import entity.Entity;
 import entity.GameBoard;
 
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class MoveAction extends Action {
 
@@ -19,15 +19,17 @@ public class MoveAction extends Action {
 
     @Override
     public void execute() {
-        for(Creature creature : getAllCreature()){
-            moveCreature(creature);
+        for(Creature creature : getCreaturesInPriorityOrder()){
+            creature.makeMove(gameBoard);
         }
     }
 
- private void moveCreature(Creature creature){
-        creature.makeMove(gameBoard);
- }
-
+    private List<Creature> getCreaturesInPriorityOrder() {
+        return getAllCreature().stream()
+                .sorted(Comparator.comparingInt(c ->
+                        c instanceof Herbivore ? 0 : 1))
+                .collect(Collectors.toList());
+    }
 
     private Set<Creature> getAllCreature(){
         Set<Creature> allCreatures = new HashSet<>();

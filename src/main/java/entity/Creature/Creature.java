@@ -9,8 +9,7 @@ public abstract class Creature extends Entity {
     private int health;
     private final int speed;
 
-    public Creature(Coordinates coordinates, int health, int speed) {
-        super(coordinates);
+    public Creature(int health, int speed) {
         this.health = health;
         this.speed = speed;
     }
@@ -28,5 +27,6 @@ public abstract class Creature extends Entity {
     }
 
     public abstract void makeMove(GameBoard gameBoard);
+    public abstract void attackThisFood(GameBoard gameBoard, Coordinates coordinates);
 
 }

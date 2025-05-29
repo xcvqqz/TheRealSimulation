@@ -22,7 +22,7 @@ public class PathFinder {
                 && (coordinates.getColumn() >= 0 && coordinates.getColumn() <= gameBoard.getMaxColumn()));
     }
 
-    public <T extends Entity> List<Coordinates> searchFood(Coordinates start,  Class<T> typeOfEntity) {
+    public <T extends Entity> List<Coordinates> searchFood(Coordinates start,  Class<T> typeOfFood) {
         pathQueue.clear();
         visitedPath.clear();
         parentsPath.clear();
@@ -36,7 +36,7 @@ public class PathFinder {
             Coordinates current = pathQueue.remove();
 
             Entity entity = gameBoard.getEntityAt(current);
-            if (entity != null && typeOfEntity.isInstance(entity)) {
+            if (entity != null && typeOfFood.isInstance(entity)) {
                 return reconstructPath(current);
             }
 
@@ -89,15 +89,4 @@ public class PathFinder {
         }
         return result;
     }
-
 }
-
-
-//            COLUMN
-//          0 1 2 3 4
-//        0 * * * * *
-//        1 * * * * *
-//   ROW  2 * * * * *
-//        3 * * * * *
-//        4 * * * * *
-//

@@ -18,13 +18,13 @@ public class MapConsoleRenderer {
         for(int column = 0; column < gameBoard.getMaxColumn()+1; column++){
             StringBuilder sb = new StringBuilder();
             for(int row = 0; row < gameBoard.getMaxRow()+1; row++) {
-                sb.append(colorizeAndGetSpriteForEntity(new Coordinates(row, column)));
+                sb.append(colorizeAndGetSprite(new Coordinates(row, column)));
             }
             System.out.println(sb.toString());
         }
     }
 
-    private String colorizeAndGetSpriteForEntity(Coordinates coordinates) {
+    private String colorizeAndGetSprite(Coordinates coordinates) {
         Entity entity = gameBoard.getCoordinatesEntityMap().get(coordinates);
         if (entity instanceof Herbivore) {
             return HERBIVORE;}

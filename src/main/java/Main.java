@@ -8,17 +8,17 @@ public class Main {
 
     public static void main(String[] args) {
 
-        GameBoard gameBoard = new GameBoard(9,9);
-        gameBoard.setNewEntityForMap();
-//
-//
+        GameBoard gameBoard = new GameBoard(10,10);
+        //gameBoard.setNewEntityForMap();
+
+
         CheckAndRespawnAction respawnAction = new CheckAndRespawnAction(gameBoard);
 
         MoveAction moveAction = new MoveAction(gameBoard);
         MapConsoleRenderer mapConsoleRenderer = new MapConsoleRenderer(gameBoard);
 
-//        SpawnAction spawnAction = new SpawnAction(gameBoard);
-//        spawnAction.execute();
+        SpawnAction spawnAction = new SpawnAction(gameBoard);
+        spawnAction.execute();
 
 
         mapConsoleRenderer.render();
@@ -79,9 +79,6 @@ public class Main {
         System.out.println("----------------------------------");
         moveAction.execute();
         mapConsoleRenderer.render();
-        System.out.println("----------------------------------");  //ТУТ ПИЗДЕЦ
-        moveAction.execute();
-        mapConsoleRenderer.render();
         System.out.println("----------------------------------");
         moveAction.execute();
         mapConsoleRenderer.render();
@@ -102,6 +99,11 @@ public class Main {
         mapConsoleRenderer.render();
         System.out.println("----------------------------------");
         moveAction.execute();
+        mapConsoleRenderer.render();
+        System.out.println("----------------------------------");
+        moveAction.execute();
+        mapConsoleRenderer.render();
+        respawnAction.execute();
         mapConsoleRenderer.render();
         System.out.println("----------------------------------");
         moveAction.execute();

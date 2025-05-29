@@ -16,7 +16,6 @@ public class CheckAndRespawnAction extends Action {
     private final Random random = new Random();
 
 
-
     public CheckAndRespawnAction(GameBoard gameBoard){
         this.gameBoard = gameBoard;
     }
@@ -27,14 +26,14 @@ public class CheckAndRespawnAction extends Action {
             Coordinates herbivoreCoords = getRandomCoordinatesForRespawnEntity();
             if (herbivoreCoords != null) {
                 gameBoard.getCoordinatesEntityMap().put(herbivoreCoords,
-                        new Herbivore(herbivoreCoords, 6, 3));
+                        new Herbivore(6, 3));
             }
         }
         if (!isEntityAvailable(Grass.class)) {
             Coordinates grassCoords = getRandomCoordinatesForRespawnEntity();
             if (grassCoords != null) {
                 gameBoard.getCoordinatesEntityMap().put(grassCoords,
-                        new Grass(grassCoords));
+                        new Grass());
             }
         }
     }
@@ -56,7 +55,7 @@ public class CheckAndRespawnAction extends Action {
 
     private Coordinates getRandomCoordinatesForRespawnEntity() {
         if (gameBoard == null) {
-            throw new IllegalStateException("GameBoard не может быть null");
+            throw new IllegalStateException("GameBoard cant be null");
         }
         int maxRow = gameBoard.getMaxRow();
         int maxColumn = gameBoard.getMaxColumn();

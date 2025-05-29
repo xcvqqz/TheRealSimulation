@@ -4,7 +4,6 @@ package entity;
 import java.util.List;
 
 public class Coordinates {
-
     private int column;
     private int row;
 
@@ -21,10 +20,10 @@ public class Coordinates {
         return row;
     }
 
+
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+    public final boolean equals(Object o) {
+        if (!(o instanceof Coordinates)) return false;
 
         Coordinates that = (Coordinates) o;
         return column == that.column && row == that.row;

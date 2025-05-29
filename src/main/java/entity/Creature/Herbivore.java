@@ -9,12 +9,12 @@ import java.util.Map;
 
 public class Herbivore extends Creature {
 
-    public Herbivore(Coordinates coordinates, int health, int speed) {
-        super(coordinates, health, speed);
+    public Herbivore(int health, int speed) {
+        super(health, speed);
     }
 
     public void makeMove(GameBoard gameBoard) {
-        List<Coordinates> pathToFood = new PathFinder(gameBoard).searchFood(getCoordinates(), Grass.class);
+        List<Coordinates> pathToFood = new PathFinder(gameBoard).searchFood(gameBoard.getCoordinates(this), Grass.class);
         if (!pathToFood.isEmpty()) {
             moveAlongPath(gameBoard, pathToFood);
         }
@@ -22,79 +22,38 @@ public class Herbivore extends Creature {
 
     private void moveAlongPath(GameBoard gameBoard, List<Coordinates> pathToGrass) {
         int steps = getSpeed();
-
-        for (int i = 0; i < pathToGrass.size(); i++) {
-            Coordinates nextStep = pathToGrass.get(i);
-            Entity entityAtNextStep = gameBoard.getEntityAt(nextStep);
-
+        for (Coordinates nextStep : pathToGrass) {
             if (steps <= 0) break;
-
-            if(entityAtNextStep instanceof Rock ||
-                    entityAtNextStep instanceof Tree ||
-                    entityAtNextStep instanceof Predator) {
+            Entity entity = gameBoard.getEntityAt(nextStep);
+            if(isObstacle(entity)) {
                 steps -= 2;
                 continue;
             }
 
-            if (entityAtNextStep instanceof Grass && steps >= 1) {
-                attackThisFood(gameBoard, nextStep); // nextStep – координаты жертвы
+            if (entity instanceof Grass && steps >= 1) {
+                attackThisFood(gameBoard, nextStep);
                 break;
             }
 
-            // Перемещение на свободную клетку
-            gameBoard.getCoordinatesEntityMap().remove(getCoordinates());
-            setCoordinates(nextStep);
+            gameBoard.getCoordinatesEntityMap().remove(gameBoard.getCoordinates(this));
             gameBoard.getCoordinatesEntityMap().put(nextStep, this);
-
             steps--;
-
-            }
         }
+    }
 
+    private boolean isObstacle(Entity entity) {
+        return entity instanceof Rock
+                || entity instanceof Tree
+                || entity instanceof Predator
+                || entity instanceof Herbivore;
+    }
 
-    private void attackThisFood(GameBoard gameBoard, Coordinates grassCoordinates) {
-        Grass grass = (Grass) gameBoard.getEntityAt(grassCoordinates);
+    @Override
+    public void attackThisFood(GameBoard gameBoard, Coordinates coordinates) {
+        Grass grass = (Grass) gameBoard.getEntityAt(coordinates);
         if (grass == null) return;
-        gameBoard.getCoordinatesEntityMap().remove(grassCoordinates);
-        gameBoard.getCoordinatesEntityMap().remove(getCoordinates());
-        setCoordinates(grassCoordinates);
-        gameBoard.getCoordinatesEntityMap().put(grassCoordinates, this);
-
+        gameBoard.getCoordinatesEntityMap().remove(coordinates);
+        gameBoard.getCoordinatesEntityMap().remove(gameBoard.getCoordinates(this));
+        gameBoard.getCoordinatesEntityMap().put(coordinates, this);
     }
-
-
-    }
-
-
-
-
-//     gameBoard.getCoordinatesEntityMap().remove(foodCoordinates);
-//                    herbivore.setCoordinates(foodCoordinates);
-//                    gameBoard.getCoordinatesEntityMap().put(foodCoordinates, herbivore);
-//                    break;}
-//
-//                            herbivore.setCoordinates(nextStep);
-//                gameBoard.getCoordinatesEntityMap().put(nextStep, herbivore);
-//        currentPosition = nextStep;
-//        steps--;
-//
-
-
-    //       COLUMN
-//          0 1 2 3 4
-//        0 * * * * *
-//        1 * * * * *    {2,3} {2,2}  {1,2} {3,3}
-//   ROW  2 * G @ * *
-//        3 * * @ H *
-//        4 * * * * *
-//
-
-
-
-
-
-
-
-
-
-
+}

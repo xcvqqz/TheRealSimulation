@@ -13,10 +13,12 @@ public class SpawnAction extends Action {
 
     private GameBoard gameBoard;
     private ArrayList<Entity> entityList;
+    private ArrayList<Coordinates> coordinatesList;
 
     public SpawnAction (GameBoard gameBoard) {
         this.gameBoard = gameBoard;
         this.entityList = new ArrayList<>();
+        this.coordinatesList = new ArrayList<>();
     }
 
     @Override
@@ -27,53 +29,46 @@ public class SpawnAction extends Action {
 
 
     private void addEntityOnGameBoard(){
-        for(Entity entity : entityList){
-            if (!gameBoard.getCoordinatesEntityMap().containsKey(entity.getCoordinates())) {
-                gameBoard.getCoordinatesEntityMap().put(entity.getCoordinates(), entity);
-            }
+        coordinatesList = generateRandomCoordinates();
+        for(int i = 0; i < entityList.size(); i++){
+            gameBoard.getCoordinatesEntityMap().put(coordinatesList.get(i), entityList.get(i));
         }
     }
 
     private void createEntityList(){
-        List<Coordinates> coordinatesForEntity = generateRandomCoordinatesForEntity();
-
-        if (coordinatesForEntity.size() < 5) {
-            throw new IllegalStateException("Не удалось сгенерировать достаточно уникальных координат");
-        }
-
-        entityList.add(createEntity(Predator.class, coordinatesForEntity.get(0)));
-        entityList.add(createEntity(Herbivore.class, coordinatesForEntity.get(1)));
-        entityList.add(createEntity(Grass.class, coordinatesForEntity.get(2)));
-        entityList.add(createEntity(Tree.class, coordinatesForEntity.get(3)));
-        entityList.add(createEntity(Rock.class, coordinatesForEntity.get(4)));
-        entityList.add(createEntity(Herbivore.class, coordinatesForEntity.get(5)));
-        entityList.add(createEntity(Grass.class, coordinatesForEntity.get(6)));
+        entityList.add(createEntity(Predator.class));
+        entityList.add(createEntity(Herbivore.class));
+        entityList.add(createEntity(Grass.class));
+        entityList.add(createEntity(Tree.class));
+        entityList.add(createEntity(Rock.class));
+        entityList.add(createEntity(Herbivore.class));
+        entityList.add(createEntity(Grass.class));
     }
 
-    private ArrayList<Coordinates> generateRandomCoordinatesForEntity() {
-        ArrayList<Coordinates> coordinatesForEntityList = new ArrayList<>();
+    private ArrayList<Coordinates> generateRandomCoordinates() {
+        ArrayList<Coordinates> resultList = new ArrayList<>();
         int maxAttempts = 100;
         for (int i = 0; i < maxAttempts; i++) {
             int randomColumn = (int) (Math.random() * gameBoard.getMaxColumn()) + 1;
             int randomRaw = (int) (Math.random() * gameBoard.getMaxRow()) + 1;
             Coordinates newCoordinates = new Coordinates(randomColumn, randomRaw);
-            if (!coordinatesForEntityList.contains(newCoordinates)) {
-                coordinatesForEntityList.add(newCoordinates);
+            if (!resultList.contains(newCoordinates)) {
+                resultList.add(newCoordinates);
             }
-            if (coordinatesForEntityList.size() > 10){
+            if (resultList.size() > 10){
                 break;
             }
         }
-        return  coordinatesForEntityList;
+        return  resultList;
     }
 
-     private <T extends Entity> Entity createEntity(Class<T> typeOfEntity, Coordinates coordinates) {
+     private <T extends Entity> Entity createEntity(Class<T> typeOfEntity) {
          return switch (typeOfEntity.getSimpleName()) {
-             case "Predator" -> new Predator(coordinates, 10, 3, 3);
-             case "Herbivore" -> new Herbivore(coordinates, 6, 3);
-             case "Grass" -> new Grass(coordinates);
-             case "Tree" -> new Tree(coordinates);
-             case "Rock" -> new Rock(coordinates);
+             case "Predator" -> new Predator(10, 3, 3);
+             case "Herbivore" -> new Herbivore(6, 3);
+             case "Grass" -> new Grass();
+             case "Tree" -> new Tree();
+             case "Rock" -> new Rock();
              default -> throw new IllegalStateException("Unexpected value: " + typeOfEntity.getSimpleName());
          };
      }
