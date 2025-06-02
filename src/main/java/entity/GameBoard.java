@@ -10,16 +10,13 @@ import java.util.Map;
 
 
 public class GameBoard{
-
     private final HashMap<Coordinates, Entity> coordinatesEntityMap = new HashMap<>();
     private final int maxColumn;
     private final int maxRow;
-
     public GameBoard(int maxColumn, int maxRow) {
         this.maxColumn = maxColumn;
         this.maxRow = maxRow;
     }
-
     public HashMap<Coordinates, Entity> getCoordinatesEntityMap() {
         return coordinatesEntityMap;
     }
@@ -43,4 +40,3 @@ public class GameBoard{
         throw new IllegalArgumentException();
     }
 }
-

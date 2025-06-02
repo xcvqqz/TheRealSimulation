@@ -1,33 +1,20 @@
 package entity.Creature;
 
-
-//Хищник - в дополнение к полям класса родителя creature.Creature имеет силу атаки
-//Хищник может:
-//1) переместиться
-//2) атаковать травоядное. количество HP травоядного уменьшается на силу атаки хищника.
-//Если значение HP жертвы опускается до 0, травояденое исчезает.
-
-
 import entity.Coordinates;
 import entity.Entity;
 import entity.GameBoard;
 import entity.PathFinder;
-
 import java.util.List;
 
 public class Predator extends Creature {
-
     private final int attackPower;
-
     public Predator(int health, int speed, int attackPower) {
         super(health, speed);
         this.attackPower = attackPower;
     }
-
     public int getAttackPower() {
         return attackPower;
     }
-
     @Override
     public void makeMove(GameBoard gameBoard) {
         List<Coordinates> pathToFood = new PathFinder(gameBoard).searchFood(gameBoard.getCoordinates(this), Herbivore.class);
@@ -35,7 +22,6 @@ public class Predator extends Creature {
             moveAlongPath(gameBoard, pathToFood);
         }
     }
-
     private void moveAlongPath(GameBoard gameBoard, List<Coordinates> pathToHerbivore) {
         int steps = getSpeed();
         for (Coordinates nextStep : pathToHerbivore) {
@@ -45,7 +31,6 @@ public class Predator extends Creature {
                 steps -= 2;
                 continue;
             }
-
             if (entity instanceof Herbivore && steps >= 1) {
                 attackThisFood(gameBoard, nextStep);
                 break;
@@ -55,13 +40,11 @@ public class Predator extends Creature {
             steps--;
         }
     }
-
     private boolean isObstacle(Entity entity) {
         return entity instanceof Rock
                 || entity instanceof Tree
                 || entity instanceof Grass;
     }
-
     @Override
     public void attackThisFood(GameBoard gameBoard, Coordinates coordinates) {
         Herbivore herbivore = (Herbivore) gameBoard.getEntityAt(coordinates);
