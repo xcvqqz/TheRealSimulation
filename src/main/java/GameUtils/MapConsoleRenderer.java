@@ -1,6 +1,10 @@
-package entity;
+package GameUtils;
 
 import entity.Creature.*;
+import entity.Entity;
+import entity.staticObject.Grass;
+import entity.staticObject.Rock;
+import entity.staticObject.Tree;
 
 public class MapConsoleRenderer {
 

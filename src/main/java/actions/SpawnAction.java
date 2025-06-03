@@ -1,13 +1,17 @@
 package actions;
 
 
-import entity.Coordinates;
+import GameUtils.Coordinates;
 import entity.Creature.*;
 import entity.Entity;
-import entity.GameBoard;
+import GameUtils.GameBoard;
+import entity.staticObject.Grass;
+import entity.staticObject.Rock;
+import entity.staticObject.Tree;
 
 import java.util.ArrayList;
-import java.util.List;
+
+import static GameUtils.SimulationConstants.*;
 
 public class SpawnAction extends Action {
 
@@ -64,8 +68,8 @@ public class SpawnAction extends Action {
 
      private <T extends Entity> Entity createEntity(Class<T> typeOfEntity) {
          return switch (typeOfEntity.getSimpleName()) {
-             case "Predator" -> new Predator(10, 3, 3);
-             case "Herbivore" -> new Herbivore(6, 3);
+             case "Predator" -> new Predator(PREDATOR_HEALTH, PREDATORE_SPEED, PREDATOR_ATTACK_POWER);
+             case "Herbivore" -> new Herbivore(HERBIVORE_HEALTH, HERBIVORE_SPEED);
              case "Grass" -> new Grass();
              case "Tree" -> new Tree();
              case "Rock" -> new Rock();

@@ -1,22 +1,23 @@
 package actions;
 
-import entity.Coordinates;
-import entity.Creature.Grass;
+import GameUtils.Coordinates;
+import entity.staticObject.Grass;
 import entity.Creature.Herbivore;
 import entity.Entity;
-import entity.GameBoard;
+import GameUtils.GameBoard;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Random;
+import static GameUtils.SimulationConstants.*;
 
-public class CheckAndRespawnAction extends Action {
+public class ControlRespawnAction extends Action {
 
     private GameBoard gameBoard;
     private static final int MAX_RESPAWN_ATTEMPTS = 100;
     private final Random random = new Random();
 
 
-    public CheckAndRespawnAction(GameBoard gameBoard){
+    public ControlRespawnAction(GameBoard gameBoard){
         this.gameBoard = gameBoard;
     }
 
@@ -26,7 +27,7 @@ public class CheckAndRespawnAction extends Action {
             Coordinates herbivoreCoords = getRandomCoordinatesForRespawnEntity();
             if (herbivoreCoords != null) {
                 gameBoard.getCoordinatesEntityMap().put(herbivoreCoords,
-                        new Herbivore(6, 3));
+                        new Herbivore(HERBIVORE_HEALTH, HERBIVORE_SPEED));
             }
         }
         if (!isEntityAvailable(Grass.class)) {
@@ -50,8 +51,6 @@ public class CheckAndRespawnAction extends Action {
             return true;
         }
     }
-
-
 
     private Coordinates getRandomCoordinatesForRespawnEntity() {
         if (gameBoard == null) {

@@ -1,6 +1,4 @@
-package entity;
-
-import java.util.List;
+package GameUtils;
 
 public class Coordinates {
     private int column;
@@ -33,13 +31,5 @@ public class Coordinates {
         int result = column;
         result = 31 * result + row;
         return result;
-    }
-
-    @Override
-    public String toString() {
-        return "Coordinates{" +
-                "column=" + column +
-                ", row=" + row +
-                '}';
     }
 }

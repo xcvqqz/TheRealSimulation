@@ -1,6 +1,6 @@
-package entity;
+package GameUtils;
 
-import entity.Creature.Creature;
+import entity.Entity;
 
 import java.util.*;
 
@@ -22,7 +22,7 @@ public class PathFinder {
                 && (coordinates.getColumn() >= 0 && coordinates.getColumn() <= gameBoard.getMaxColumn()));
     }
 
-    public <T extends Entity> List<Coordinates> searchFood(Coordinates start,  Class<T> typeOfFood) {
+    public <T extends Entity> List<Coordinates> searchFood(Coordinates start, Class<T> typeOfFood) {
         pathQueue.clear();
         visitedPath.clear();
         parentsPath.clear();

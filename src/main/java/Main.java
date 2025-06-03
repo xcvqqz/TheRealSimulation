@@ -1,150 +1,28 @@
-import actions.CheckAndRespawnAction;
-import actions.MoveAction;
-import actions.SpawnAction;
-import entity.GameBoard;
-import entity.MapConsoleRenderer;
-import entity.Simulation;
+import GameUtils.GameBoard;
+import GameUtils.Simulation;
+
+import java.io.PrintStream;
+import java.nio.charset.StandardCharsets;
+import static GameUtils.SimulationConstants.*;
 
 public class Main {
 
     public static void main(String[] args) {
-//
-//        GameBoard gameBoard = new GameBoard(10,10);
-//        //gameBoard.setNewEntityForMap();
-//
-//
-//        CheckAndRespawnAction respawnAction = new CheckAndRespawnAction(gameBoard);
-//
-//        MoveAction moveAction = new MoveAction(gameBoard);
-//        MapConsoleRenderer mapConsoleRenderer = new MapConsoleRenderer(gameBoard);
-//
-//        SpawnAction spawnAction = new SpawnAction(gameBoard);
-//        spawnAction.execute();
-//
-//
-//        mapConsoleRenderer.render();
-//        moveAction.execute();
-//        System.out.println("----------------------------------");
-//        mapConsoleRenderer.render();
-//        System.out.println("----------------------------------");
-//        moveAction.execute();
-//        mapConsoleRenderer.render();
-//        System.out.println("----------------------------------");
-//        moveAction.execute();
-//        mapConsoleRenderer.render();
-//        System.out.println("----------------------------------");
-//        moveAction.execute();
-//        mapConsoleRenderer.render();
-//        System.out.println("----------------------------------");
-//        moveAction.execute();
-//        mapConsoleRenderer.render();
-//        System.out.println("----------------------------------");
-//        moveAction.execute();
-//        mapConsoleRenderer.render();
-//        System.out.println("----------------------------------");
-//        moveAction.execute();
-//        mapConsoleRenderer.render();
-//        respawnAction.execute();
-//        System.out.println("----------------------------------");
-//        mapConsoleRenderer.render();
-//        System.out.println("----------------------------------");
-//        moveAction.execute();
-//        mapConsoleRenderer.render();
-//        System.out.println("----------------------------------");
-//        moveAction.execute();
-//        mapConsoleRenderer.render();
-//        System.out.println("----------------------------------");
-//        moveAction.execute();
-//        mapConsoleRenderer.render();
-//        System.out.println("----------------------------------");
-//        moveAction.execute();
-//        mapConsoleRenderer.render();
-//        System.out.println("----------------------------------");
-//        moveAction.execute();
-//        mapConsoleRenderer.render();
-//        System.out.println("----------------------------------");
-//        moveAction.execute();
-//        mapConsoleRenderer.render();
-//        System.out.println("----------------------------------");
-//        moveAction.execute();
-//        mapConsoleRenderer.render();
-//        System.out.println("----------------------------------");
-//        moveAction.execute();
-//        mapConsoleRenderer.render();
-//        System.out.println("----------------------------------");
-//        respawnAction.execute();
-//        mapConsoleRenderer.render();
-//        System.out.println("----------------------------------");
-//        moveAction.execute();
-//        mapConsoleRenderer.render();
-//        System.out.println("----------------------------------");
-//        moveAction.execute();
-//        mapConsoleRenderer.render();
-//        System.out.println("----------------------------------");
-//        moveAction.execute();
-//        mapConsoleRenderer.render();
-//        System.out.println("----------------------------------");
-//        moveAction.execute();
-//        mapConsoleRenderer.render();
-//        System.out.println("----------------------------------");
-//        moveAction.execute();
-//        mapConsoleRenderer.render();
-//        System.out.println("----------------------------------");
-//        moveAction.execute();
-//        mapConsoleRenderer.render();
-//        System.out.println("----------------------------------");
-//        moveAction.execute();
-//        mapConsoleRenderer.render();
-//        System.out.println("----------------------------------");
-//        moveAction.execute();
-//        mapConsoleRenderer.render();
-//        System.out.println("----------------------------------");
-//        moveAction.execute();
-//        mapConsoleRenderer.render();
-//        System.out.println("----------------------------------");
-//        moveAction.execute();
-//        mapConsoleRenderer.render();
-//        respawnAction.execute();
-//        mapConsoleRenderer.render();
-//        System.out.println("----------------------------------");
-//        moveAction.execute();
-//        mapConsoleRenderer.render();
-//        System.out.println("----------------------------------");
-//        moveAction.execute();
-//        mapConsoleRenderer.render();
-//        System.out.println("----------------------------------");
-//        moveAction.execute();
-//        mapConsoleRenderer.render();
-//        System.out.println("----------------------------------");
-//        moveAction.execute();
-//        mapConsoleRenderer.render();
-//        System.out.println("----------------------------------");
-//        moveAction.execute();
-//        mapConsoleRenderer.render();
-//        System.out.println("----------------------------------");
-//
-//
-//
-//
-//
-//
-//
-//        int x = 0;
 
-
-        Simulation simulation = new Simulation(new GameBoard(5,5));
+        System.setOut(new PrintStream(System.out, true, StandardCharsets.UTF_8));
+        Simulation simulation = new Simulation(new GameBoard(GAMEBOARD_LENGTH, GAMEBOARD_WIDTH));
         simulation.startSimulation();
 
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        try{
+            Thread.sleep(10000);
+        } catch (InterruptedException e){
+
         }
 
         simulation.pauseSimulation();
     }
+}
 
-    }
 
 
 

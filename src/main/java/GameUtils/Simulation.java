@@ -1,9 +1,9 @@
-package entity;
+package GameUtils;
 import actions.Action;
-import actions.CheckAndRespawnAction;
+import actions.ControlRespawnAction;
 import actions.MoveAction;
 import actions.SpawnAction;
-
+import static GameUtils.SimulationConstants.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -11,6 +11,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class Simulation {
 
     private final GameBoard gameBoard;
+
+    public static int simulationTurnCounter = 0;
     private final AtomicBoolean isRunning = new AtomicBoolean(false);
     private final List<Action> initActions;
     private final List<Action> turnActions;
@@ -26,10 +28,9 @@ public class Simulation {
 
     private void addActionsList(){
         initActions.add(new SpawnAction(gameBoard));
-        turnActions.add(new CheckAndRespawnAction(gameBoard));
+        turnActions.add(new ControlRespawnAction(gameBoard));
         turnActions.add(new MoveAction(gameBoard));
     }
-
 
     private void initSimulation() {
         for (Action action : initActions) {
@@ -37,18 +38,20 @@ public class Simulation {
         }
     }
 
-    private void turnSimulation(){
+    private void nextTurn(){
         for (Action action : turnActions){
             action.execute();
+            renderSimulation();
         }
     }
 
    private void renderSimulation(){
         mapConsoleRenderer.render();
-       System.out.println("-------------------------");
+       System.out.println(RENDERER_VISUAL_LINE);
    }
 
    public void startSimulation(){
+
         if(isRunning.get()){
             return;
         }
@@ -58,16 +61,20 @@ public class Simulation {
             addActionsList();
             initSimulation();
             while (isRunning.get()){
-                turnSimulation();
-                renderSimulation();
+                nextTurn();
                 try{
                     Thread.sleep(2000);
                 } catch (InterruptedException e){
                     Thread.currentThread().interrupt();
                 }
             }
+            incrementSimulationTurnCounter();
         });
        simulationThread.start();
+   }
+
+   private void incrementSimulationTurnCounter(){
+        simulationTurnCounter+=1;
    }
 
     public void pauseSimulation() {

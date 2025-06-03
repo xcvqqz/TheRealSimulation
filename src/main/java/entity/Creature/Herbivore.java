@@ -1,11 +1,13 @@
 package entity.Creature;
 
-import entity.Coordinates;
+import GameUtils.Coordinates;
 import entity.Entity;
-import entity.GameBoard;
-import entity.PathFinder;
+import GameUtils.GameBoard;
+import GameUtils.PathFinder;
+import entity.staticObject.Grass;
+import entity.staticObject.Rock;
+import entity.staticObject.Tree;
 import java.util.List;
-import java.util.Map;
 
 public class Herbivore extends Creature {
     public Herbivore(int health, int speed) {
@@ -17,6 +19,7 @@ public class Herbivore extends Creature {
             moveAlongPath(gameBoard, pathToFood);
         }
     }
+
     private void moveAlongPath(GameBoard gameBoard, List<Coordinates> pathToGrass) {
         int steps = getSpeed();
         for (Coordinates nextStep : pathToGrass) {
@@ -35,12 +38,14 @@ public class Herbivore extends Creature {
             steps--;
         }
     }
+
     private boolean isObstacle(Entity entity) {
         return entity instanceof Rock
                 || entity instanceof Tree
                 || entity instanceof Predator
                 || entity instanceof Herbivore;
     }
+
     @Override
     public void attackThisFood(GameBoard gameBoard, Coordinates coordinates) {
         Grass grass = (Grass) gameBoard.getEntityAt(coordinates);

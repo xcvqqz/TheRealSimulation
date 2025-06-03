@@ -1,9 +1,12 @@
 package entity.Creature;
 
-import entity.Coordinates;
+import GameUtils.Coordinates;
 import entity.Entity;
-import entity.GameBoard;
-import entity.PathFinder;
+import GameUtils.GameBoard;
+import GameUtils.PathFinder;
+import entity.staticObject.Grass;
+import entity.staticObject.Rock;
+import entity.staticObject.Tree;
 import java.util.List;
 
 public class Predator extends Creature {
@@ -12,6 +15,7 @@ public class Predator extends Creature {
         super(health, speed);
         this.attackPower = attackPower;
     }
+
     public int getAttackPower() {
         return attackPower;
     }
@@ -22,6 +26,7 @@ public class Predator extends Creature {
             moveAlongPath(gameBoard, pathToFood);
         }
     }
+
     private void moveAlongPath(GameBoard gameBoard, List<Coordinates> pathToHerbivore) {
         int steps = getSpeed();
         for (Coordinates nextStep : pathToHerbivore) {
@@ -40,11 +45,13 @@ public class Predator extends Creature {
             steps--;
         }
     }
+
     private boolean isObstacle(Entity entity) {
         return entity instanceof Rock
                 || entity instanceof Tree
                 || entity instanceof Grass;
     }
+
     @Override
     public void attackThisFood(GameBoard gameBoard, Coordinates coordinates) {
         Herbivore herbivore = (Herbivore) gameBoard.getEntityAt(coordinates);

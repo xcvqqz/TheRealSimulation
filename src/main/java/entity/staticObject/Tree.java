@@ -1,6 +1,5 @@
-package entity.Creature;
+package entity.staticObject;
 
-import entity.Coordinates;
 import entity.Entity;
 
 public class Tree extends Entity {
