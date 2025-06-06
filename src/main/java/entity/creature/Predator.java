@@ -44,6 +44,7 @@ public class Predator extends Creature {
                 moveCreature(gameBoard, gameBoard.getCoordinates(this), nextStep);
                 break;
             }
+
             moveCreature(gameBoard, gameBoard.getCoordinates(this), nextStep);
             steps--;
         }

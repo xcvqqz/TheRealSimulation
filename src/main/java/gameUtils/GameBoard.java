@@ -7,22 +7,22 @@ import java.util.*;
 
 public class GameBoard{
     private final HashMap<Coordinates, Entity> coordinatesEntityMap = new HashMap<>();
-    private final int maxColumn;
-    private final int maxRow;
+    private final int length;
+    private final int width;
 
     public GameBoard() {
-        this.maxColumn = SimulationConstants.GAMEBOARD_LENGTH;
-        this.maxRow = SimulationConstants.GAMEBOARD_WIDTH;
+        this.length = SimulationConstants.GAMEBOARD_LENGTH;
+        this.width = SimulationConstants.GAMEBOARD_WIDTH;
     }
 
     public HashMap<Coordinates, Entity> getCoordinatesEntityMap() {
         return coordinatesEntityMap;
     }
-    public int getMaxColumn() {
-        return maxColumn;
+    public int getLength() {
+        return length;
     }
-    public int getMaxRow() {
-        return maxRow;
+    public int getWidth() {
+        return width;
     }
 
     public Entity getEntityAt(Coordinates coordinates) {
@@ -40,8 +40,8 @@ public class GameBoard{
 
     public Coordinates getRandomFreeCoordinates(){
         List<Coordinates> freeCoordinates = new ArrayList<>();
-        for(int column = 0; column < getMaxColumn()+1; column++){
-            for(int row = 0; row < getMaxRow()+1; row++) {
+        for(int column = 0; column < getLength()+1; column++){
+            for(int row = 0; row < getWidth()+1; row++) {
                 Coordinates current = new Coordinates(column, row);
                 if(!getCoordinatesEntityMap().containsKey(current)){
                     freeCoordinates.add(current);

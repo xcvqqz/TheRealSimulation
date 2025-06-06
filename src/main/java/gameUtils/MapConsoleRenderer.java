@@ -19,9 +19,9 @@ public class MapConsoleRenderer {
     public MapConsoleRenderer(GameBoard gameBoard) {this.gameBoard = gameBoard;}
 
     public void render(){
-        for(int column = 0; column < gameBoard.getMaxColumn()+1; column++){
+        for(int column = 0; column < gameBoard.getLength()+1; column++){
             StringBuilder sb = new StringBuilder();
-            for(int row = 0; row < gameBoard.getMaxRow()+1; row++) {
+            for(int row = 0; row < gameBoard.getWidth()+1; row++) {
                 sb.append(colorizeAndGetSprite(new Coordinates(row, column)));
             }
             System.out.println(sb.toString());
