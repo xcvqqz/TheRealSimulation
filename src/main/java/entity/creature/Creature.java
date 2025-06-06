@@ -27,4 +27,5 @@ public abstract class Creature extends Entity {
 
     public abstract void makeMove(GameBoard gameBoard);
     public abstract void attackFood(GameBoard gameBoard, Coordinates coordinates);
+    public abstract void moveCreature(GameBoard gameBoard, Coordinates from, Coordinates to);
 }

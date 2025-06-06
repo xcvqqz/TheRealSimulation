@@ -56,6 +56,7 @@ public class Herbivore extends Creature {
 
     }
 
+    @Override
     public void moveCreature(GameBoard gameBoard, Coordinates from, Coordinates to){
         gameBoard.getCoordinatesEntityMap().remove(from);
         gameBoard.getCoordinatesEntityMap().put(to, this);

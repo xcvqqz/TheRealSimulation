@@ -41,10 +41,10 @@ public class Predator extends Creature {
             }
             if (entity instanceof Herbivore && steps >= 1) {
                 attackFood(gameBoard, nextStep);
+                moveCreature(gameBoard, gameBoard.getCoordinates(this), nextStep);
                 break;
             }
-            gameBoard.getCoordinatesEntityMap().remove(gameBoard.getCoordinates(this));
-            gameBoard.getCoordinatesEntityMap().put(nextStep, this);
+            moveCreature(gameBoard, gameBoard.getCoordinates(this), nextStep);
             steps--;
         }
     }
@@ -59,12 +59,16 @@ public class Predator extends Creature {
     public void attackFood(GameBoard gameBoard, Coordinates coordinates) {
         Herbivore herbivore = (Herbivore) gameBoard.getEntityAt(coordinates);
         if (herbivore == null) return;
-        if (herbivore.getHealth() - getAttackPower() <= 0) {
+        herbivore.setHealth(herbivore.getHealth() - getAttackPower());
+        if (herbivore.getHealth() <= 0) {
             gameBoard.getCoordinatesEntityMap().remove(coordinates);
-            gameBoard.getCoordinatesEntityMap().remove(gameBoard.getCoordinates(this));
-            gameBoard.getCoordinatesEntityMap().put(coordinates, this);
-        } else {
-            herbivore.setHealth(herbivore.getHealth() - getAttackPower());
         }
     }
+
+    @Override
+    public void moveCreature(GameBoard gameBoard, Coordinates from, Coordinates to){
+        gameBoard.getCoordinatesEntityMap().remove(from);
+        gameBoard.getCoordinatesEntityMap().put(to, this);
+    }
+
 }
