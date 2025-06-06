@@ -1,18 +1,20 @@
-package entity.Creature;
+package entity.creature;
 
 import gameUtils.Coordinates;
 import entity.Entity;
 import gameUtils.GameBoard;
 import gameUtils.PathFinder;
-import entity.staticObject.Grass;
-import entity.staticObject.Rock;
-import entity.staticObject.Tree;
+import entity.static_object.Grass;
+import entity.static_object.Rock;
+import entity.static_object.Tree;
 import java.util.List;
 
 public class Herbivore extends Creature {
+
     public Herbivore(int health, int speed) {
         super(health, speed);
     }
+
     public void makeMove(GameBoard gameBoard) {
         List<Coordinates> pathToFood = new PathFinder(gameBoard).searchFood(gameBoard.getCoordinates(this), Grass.class);
         if (!pathToFood.isEmpty()) {
@@ -30,11 +32,12 @@ public class Herbivore extends Creature {
                 continue;
             }
             if (entity instanceof Grass && steps >= 1) {
-                attackThisFood(gameBoard, nextStep);
+                attackFood(gameBoard, nextStep);
+                moveCreature(gameBoard, gameBoard.getCoordinates(this), nextStep);
                 break;
             }
-            gameBoard.getCoordinatesEntityMap().remove(gameBoard.getCoordinates(this));
-            gameBoard.getCoordinatesEntityMap().put(nextStep, this);
+
+            moveCreature(gameBoard, gameBoard.getCoordinates(this), nextStep);
             steps--;
         }
     }
@@ -47,11 +50,15 @@ public class Herbivore extends Creature {
     }
 
     @Override
-    public void attackThisFood(GameBoard gameBoard, Coordinates coordinates) {
-        Grass grass = (Grass) gameBoard.getEntityAt(coordinates);
-        if (grass == null) return;
+    public void attackFood(GameBoard gameBoard, Coordinates coordinates) {
+        if (coordinates == null) return;
         gameBoard.getCoordinatesEntityMap().remove(coordinates);
-        gameBoard.getCoordinatesEntityMap().remove(gameBoard.getCoordinates(this));
-        gameBoard.getCoordinatesEntityMap().put(coordinates, this);
+
     }
+
+    public void moveCreature(GameBoard gameBoard, Coordinates from, Coordinates to){
+        gameBoard.getCoordinatesEntityMap().remove(from);
+        gameBoard.getCoordinatesEntityMap().put(to, this);
+    }
+
 }

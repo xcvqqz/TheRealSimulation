@@ -1,10 +1,10 @@
 package gameUtils;
 
-import entity.Creature.*;
+import entity.creature.*;
 import entity.Entity;
-import entity.staticObject.Grass;
-import entity.staticObject.Rock;
-import entity.staticObject.Tree;
+import entity.static_object.Grass;
+import entity.static_object.Rock;
+import entity.static_object.Tree;
 
 public class MapConsoleRenderer {
 

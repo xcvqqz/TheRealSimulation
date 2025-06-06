@@ -1,21 +1,18 @@
 package actions;
 
 import gameUtils.Coordinates;
-import entity.staticObject.Grass;
-import entity.Creature.Herbivore;
+import entity.static_object.Grass;
+import entity.creature.Herbivore;
 import entity.Entity;
 import gameUtils.GameBoard;
 import java.util.ArrayList;
 import java.util.Map;
-import java.util.Random;
+
 import static gameUtils.SimulationConstants.*;
 
 public class ControlRespawnAction extends Action {
 
     private GameBoard gameBoard;
-    private static final int MAX_RESPAWN_ATTEMPTS = 100;
-    private final Random random = new Random();
-
 
     public ControlRespawnAction(GameBoard gameBoard) {
         this.gameBoard = gameBoard;

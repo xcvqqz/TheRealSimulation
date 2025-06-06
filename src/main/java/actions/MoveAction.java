@@ -1,8 +1,8 @@
 package actions;
 
 import gameUtils.Coordinates;
-import entity.Creature.Creature;
-import entity.Creature.Herbivore;
+import entity.creature.Creature;
+import entity.creature.Herbivore;
 import entity.Entity;
 import gameUtils.GameBoard;
 

@@ -1,28 +1,23 @@
 package actions;
 
-
 import gameUtils.Coordinates;
-import entity.Creature.*;
+import entity.creature.*;
 import entity.Entity;
 import gameUtils.GameBoard;
-import entity.staticObject.Grass;
-import entity.staticObject.Rock;
-import entity.staticObject.Tree;
-
+import entity.static_object.Grass;
+import entity.static_object.Rock;
+import entity.static_object.Tree;
 import java.util.ArrayList;
-
 import static gameUtils.SimulationConstants.*;
 
 public class SpawnAction extends Action {
 
     private GameBoard gameBoard;
     private ArrayList<Entity> entityList;
-    private ArrayList<Coordinates> coordinatesList;
 
     public SpawnAction (GameBoard gameBoard) {
         this.gameBoard = gameBoard;
         this.entityList = new ArrayList<>();
-        this.coordinatesList = new ArrayList<>();
     }
 
     @Override
@@ -30,7 +25,6 @@ public class SpawnAction extends Action {
         createEntityList();
         addEntityOnGameBoard();
     }
-
 
     private void addEntityOnGameBoard(){
         for(int i = 0; i < entityList.size(); i++){
@@ -51,7 +45,7 @@ public class SpawnAction extends Action {
 
      private <T extends Entity> Entity createEntity(Class<T> typeOfEntity) {
          return switch (typeOfEntity.getSimpleName()) {
-             case "Predator" -> new Predator(PREDATOR_HEALTH, PREDATORE_SPEED, PREDATOR_ATTACK_POWER);
+             case "Predator" -> new Predator(PREDATOR_HEALTH, PREDATOR_SPEED, PREDATOR_ATTACK_POWER);
              case "Herbivore" -> new Herbivore(HERBIVORE_HEALTH, HERBIVORE_SPEED);
              case "Grass" -> new Grass();
              case "Tree" -> new Tree();
