@@ -1,14 +1,14 @@
 package actions;
 
-import GameUtils.Coordinates;
+import gameUtils.Coordinates;
 import entity.staticObject.Grass;
 import entity.Creature.Herbivore;
 import entity.Entity;
-import GameUtils.GameBoard;
+import gameUtils.GameBoard;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Random;
-import static GameUtils.SimulationConstants.*;
+import static gameUtils.SimulationConstants.*;
 
 public class ControlRespawnAction extends Action {
 

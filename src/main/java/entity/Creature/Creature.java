@@ -1,8 +1,8 @@
 package entity.Creature;
 
-import GameUtils.Coordinates;
+import gameUtils.Coordinates;
 import entity.Entity;
-import GameUtils.GameBoard;
+import gameUtils.GameBoard;
 
 public abstract class Creature extends Entity {
     private int health;

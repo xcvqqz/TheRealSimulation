@@ -1,9 +1,9 @@
 package entity.Creature;
 
-import GameUtils.Coordinates;
+import gameUtils.Coordinates;
 import entity.Entity;
-import GameUtils.GameBoard;
-import GameUtils.PathFinder;
+import gameUtils.GameBoard;
+import gameUtils.PathFinder;
 import entity.staticObject.Grass;
 import entity.staticObject.Rock;
 import entity.staticObject.Tree;

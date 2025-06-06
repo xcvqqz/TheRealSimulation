@@ -1,4 +1,4 @@
-package GameUtils;
+package gameUtils;
 
 import entity.Entity;
 
@@ -18,8 +18,8 @@ public class PathFinder {
     }
 
     private boolean isValidateCoordinate(Coordinates coordinates) {
-        return ((coordinates.getRow() >= 0 && coordinates.getRow() <= gameBoard.getMaxRow())
-                && (coordinates.getColumn() >= 0 && coordinates.getColumn() <= gameBoard.getMaxColumn()));
+        return ((coordinates.row() >= 0 && coordinates.row() <= gameBoard.getMaxRow())
+                && (coordinates.column() >= 0 && coordinates.column() <= gameBoard.getMaxColumn()));
     }
 
     public <T extends Entity> List<Coordinates> searchFood(Coordinates start, Class<T> typeOfFood) {
@@ -88,8 +88,8 @@ public class PathFinder {
     private HashSet<Coordinates> getNeighboursCoordinates(Coordinates currentCoordinates) {
         HashSet<Coordinates> result = new HashSet<>();
         for (Coordinates direction : getShiftDirections()) {
-            int newColumn = currentCoordinates.getColumn() + direction.getColumn();
-            int newRow = currentCoordinates.getRow() + direction.getRow();
+            int newColumn = currentCoordinates.column() + direction.column();
+            int newRow = currentCoordinates.row() + direction.row();
             Coordinates newCoordinate = new Coordinates(newColumn, newRow);
             if (isValidateCoordinate(newCoordinate)) {
                 result.add(newCoordinate);

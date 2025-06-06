@@ -1,9 +1,9 @@
-package GameUtils;
+package gameUtils;
 import actions.Action;
 import actions.ControlRespawnAction;
 import actions.MoveAction;
 import actions.SpawnAction;
-import static GameUtils.SimulationConstants.*;
+import static gameUtils.SimulationConstants.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;

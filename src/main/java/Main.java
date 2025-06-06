@@ -1,16 +1,15 @@
-import GameUtils.GameBoard;
-import GameUtils.Simulation;
+import gameUtils.GameBoard;
+import gameUtils.Simulation;
 
 import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
-import static GameUtils.SimulationConstants.*;
 
 public class Main {
 
     public static void main(String[] args) {
 
         System.setOut(new PrintStream(System.out, true, StandardCharsets.UTF_8));
-        Simulation simulation = new Simulation(new GameBoard(GAMEBOARD_LENGTH, GAMEBOARD_WIDTH));
+        Simulation simulation = new Simulation(new GameBoard());
         simulation.startSimulation();
 
         try{

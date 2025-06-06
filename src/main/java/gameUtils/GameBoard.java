@@ -1,20 +1,20 @@
-package GameUtils;
+package gameUtils;
 
 
-import GameUtils.Coordinates;
 import entity.Entity;
 
 import java.util.*;
-
 
 public class GameBoard{
     private final HashMap<Coordinates, Entity> coordinatesEntityMap = new HashMap<>();
     private final int maxColumn;
     private final int maxRow;
-    public GameBoard(int maxColumn, int maxRow) {
-        this.maxColumn = maxColumn;
-        this.maxRow = maxRow;
+
+    public GameBoard() {
+        this.maxColumn = SimulationConstants.GAMEBOARD_LENGTH;
+        this.maxRow = SimulationConstants.GAMEBOARD_WIDTH;
     }
+
     public HashMap<Coordinates, Entity> getCoordinatesEntityMap() {
         return coordinatesEntityMap;
     }
@@ -25,8 +25,8 @@ public class GameBoard{
         return maxRow;
     }
 
-    public Entity getEntityAt(Coordinates current) {
-        return getCoordinatesEntityMap().get(current);
+    public Entity getEntityAt(Coordinates coordinates) {
+        return getCoordinatesEntityMap().get(coordinates);
     }
 
     public Coordinates getCoordinates (Entity entity){

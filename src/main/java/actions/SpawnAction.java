@@ -1,17 +1,17 @@
 package actions;
 
 
-import GameUtils.Coordinates;
+import gameUtils.Coordinates;
 import entity.Creature.*;
 import entity.Entity;
-import GameUtils.GameBoard;
+import gameUtils.GameBoard;
 import entity.staticObject.Grass;
 import entity.staticObject.Rock;
 import entity.staticObject.Tree;
 
 import java.util.ArrayList;
 
-import static GameUtils.SimulationConstants.*;
+import static gameUtils.SimulationConstants.*;
 
 public class SpawnAction extends Action {
 

@@ -1,10 +1,10 @@
 package actions;
 
-import GameUtils.Coordinates;
+import gameUtils.Coordinates;
 import entity.Creature.Creature;
 import entity.Creature.Herbivore;
 import entity.Entity;
-import GameUtils.GameBoard;
+import gameUtils.GameBoard;
 
 import java.util.*;
 import java.util.stream.Collectors;
