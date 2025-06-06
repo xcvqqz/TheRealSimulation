@@ -16,4 +16,5 @@ public final class SimulationConstants {
     public static final int PREDATOR_HEALTH = 10;
     public static final int PREDATOR_ATTACK_POWER = 3;
     public static final String RENDERER_VISUAL_LINE = "\u001B[96m" + ANSI_RESET;
+    public static final String TURN_COUNTER_INFO_MESSAGE = "ХОД ПОД НОМЕРОМ ";
 }

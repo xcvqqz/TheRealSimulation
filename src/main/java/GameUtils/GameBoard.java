@@ -4,8 +4,7 @@ package GameUtils;
 import GameUtils.Coordinates;
 import entity.Entity;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 
 public class GameBoard{
@@ -37,5 +36,19 @@ public class GameBoard{
             }
         }
         throw new IllegalArgumentException();
+    }
+
+    public Coordinates getRandomFreeCoordinates(){
+        List<Coordinates> freeCoordinates = new ArrayList<>();
+        for(int column = 0; column < getMaxColumn()+1; column++){
+            for(int row = 0; row < getMaxRow()+1; row++) {
+                Coordinates current = new Coordinates(column, row);
+                if(!getCoordinatesEntityMap().containsKey(current)){
+                    freeCoordinates.add(current);
+                }
+            }
+        }
+        Collections.shuffle(freeCoordinates);
+        return freeCoordinates.get(0);
     }
 }

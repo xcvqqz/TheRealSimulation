@@ -33,9 +33,9 @@ public class SpawnAction extends Action {
 
 
     private void addEntityOnGameBoard(){
-        coordinatesList = generateRandomCoordinates();
         for(int i = 0; i < entityList.size(); i++){
-            gameBoard.getCoordinatesEntityMap().put(coordinatesList.get(i), entityList.get(i));
+            Coordinates newCoordinates = gameBoard.getRandomFreeCoordinates();
+            gameBoard.getCoordinatesEntityMap().put(newCoordinates, entityList.get(i));
         }
     }
 
@@ -47,23 +47,6 @@ public class SpawnAction extends Action {
         entityList.add(createEntity(Rock.class));
         entityList.add(createEntity(Herbivore.class));
         entityList.add(createEntity(Grass.class));
-    }
-
-    private ArrayList<Coordinates> generateRandomCoordinates() {
-        ArrayList<Coordinates> resultList = new ArrayList<>();
-        int maxAttempts = 100;
-        for (int i = 0; i < maxAttempts; i++) {
-            int randomColumn = (int) (Math.random() * gameBoard.getMaxColumn()) + 1;
-            int randomRaw = (int) (Math.random() * gameBoard.getMaxRow()) + 1;
-            Coordinates newCoordinates = new Coordinates(randomColumn, randomRaw);
-            if (!resultList.contains(newCoordinates)) {
-                resultList.add(newCoordinates);
-            }
-            if (resultList.size() > 10){
-                break;
-            }
-        }
-        return  resultList;
     }
 
      private <T extends Entity> Entity createEntity(Class<T> typeOfEntity) {

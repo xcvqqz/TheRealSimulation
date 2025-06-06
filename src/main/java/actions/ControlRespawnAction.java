@@ -17,59 +17,39 @@ public class ControlRespawnAction extends Action {
     private final Random random = new Random();
 
 
-    public ControlRespawnAction(GameBoard gameBoard){
+    public ControlRespawnAction(GameBoard gameBoard) {
         this.gameBoard = gameBoard;
     }
 
     @Override
     public void execute() {
         if (!isEntityAvailable(Herbivore.class)) {
-            Coordinates herbivoreCoords = getRandomCoordinatesForRespawnEntity();
+            Coordinates herbivoreCoords = gameBoard.getRandomFreeCoordinates();
             if (herbivoreCoords != null) {
                 gameBoard.getCoordinatesEntityMap().put(herbivoreCoords,
                         new Herbivore(HERBIVORE_HEALTH, HERBIVORE_SPEED));
             }
         }
         if (!isEntityAvailable(Grass.class)) {
-            Coordinates grassCoords = getRandomCoordinatesForRespawnEntity();
+            Coordinates grassCoords = gameBoard.getRandomFreeCoordinates();
             if (grassCoords != null) {
                 gameBoard.getCoordinatesEntityMap().put(grassCoords,
                         new Grass());
             }
         }
     }
-    private <T extends Entity> boolean isEntityAvailable(Class<T> typeOfEntity){
+
+    private <T extends Entity> boolean isEntityAvailable(Class<T> typeOfEntity) {
         ArrayList<T> entityList = new ArrayList<>();
-        for(Map.Entry<Coordinates, Entity> entity : gameBoard.getCoordinatesEntityMap().entrySet()){
-            if(typeOfEntity.isInstance(entity.getValue())){
+        for (Map.Entry<Coordinates, Entity> entity : gameBoard.getCoordinatesEntityMap().entrySet()) {
+            if (typeOfEntity.isInstance(entity.getValue())) {
                 entityList.add((T) entity.getValue());
             }
         }
-        if(entityList.isEmpty()){
+        if (entityList.isEmpty()) {
             return false;
         } else {
             return true;
         }
-    }
-
-    private Coordinates getRandomCoordinatesForRespawnEntity() {
-        if (gameBoard == null) {
-            throw new IllegalStateException("GameBoard cant be null");
-        }
-        int maxRow = gameBoard.getMaxRow();
-        int maxColumn = gameBoard.getMaxColumn();
-        int attempts = 0;
-
-        while (attempts < MAX_RESPAWN_ATTEMPTS) {
-            int randomRow = random.nextInt(maxRow);
-            int randomColumn = random.nextInt(maxColumn);
-            Coordinates temp = new Coordinates(randomRow, randomColumn);
-
-            if (!gameBoard.getCoordinatesEntityMap().containsKey(temp)) {
-                return temp;
-            }
-            attempts++;
-        }
-        return null;
     }
 }

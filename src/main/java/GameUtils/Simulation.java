@@ -7,12 +7,13 @@ import static GameUtils.SimulationConstants.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Simulation {
 
     private final GameBoard gameBoard;
 
-    public static int simulationTurnCounter = 0;
+    public static AtomicInteger simulationTurnCounter = new AtomicInteger(0);
     private final AtomicBoolean isRunning = new AtomicBoolean(false);
     private final List<Action> initActions;
     private final List<Action> turnActions;
@@ -41,7 +42,6 @@ public class Simulation {
     private void nextTurn(){
         for (Action action : turnActions){
             action.execute();
-            renderSimulation();
         }
     }
 
@@ -62,19 +62,23 @@ public class Simulation {
             initSimulation();
             while (isRunning.get()){
                 nextTurn();
+                printSimulationTurnCounter();
+                renderSimulation();
                 try{
-                    Thread.sleep(2000);
+                    Thread.sleep(1000);
                 } catch (InterruptedException e){
                     Thread.currentThread().interrupt();
                 }
             }
-            incrementSimulationTurnCounter();
         });
        simulationThread.start();
    }
 
    private void incrementSimulationTurnCounter(){
-        simulationTurnCounter+=1;
+        simulationTurnCounter.incrementAndGet();
+   }
+   private void printSimulationTurnCounter(){
+       System.out.println(TURN_COUNTER_INFO_MESSAGE + simulationTurnCounter.incrementAndGet());
    }
 
     public void pauseSimulation() {

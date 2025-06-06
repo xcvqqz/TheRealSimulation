@@ -27,6 +27,7 @@ public class PathFinder {
         visitedPath.clear();
         parentsPath.clear();
 
+
         pathQueue.add(start);
         visitedPath.add(start);
         parentsPath.put(start, null);
@@ -51,6 +52,13 @@ public class PathFinder {
 
         return Collections.emptyList();
     }
+
+
+//    private <T extends Entity> boolean isObstacle(Coordinates current, Class<T> food) {
+//        if(gameBoard.getEntityAt(current) != null){
+//
+//        }
+//    }
 
     private LinkedList<Coordinates> reconstructPath(Coordinates goal) {
         LinkedList<Coordinates> path = new LinkedList<>();
@@ -79,9 +87,9 @@ public class PathFinder {
 
     private HashSet<Coordinates> getNeighboursCoordinates(Coordinates currentCoordinates) {
         HashSet<Coordinates> result = new HashSet<>();
-        for (Coordinates directionCoordinates : getShiftDirections()) {
-            int newColumn = currentCoordinates.getColumn() + directionCoordinates.getColumn();
-            int newRow = currentCoordinates.getRow() + directionCoordinates.getRow();
+        for (Coordinates direction : getShiftDirections()) {
+            int newColumn = currentCoordinates.getColumn() + direction.getColumn();
+            int newRow = currentCoordinates.getRow() + direction.getRow();
             Coordinates newCoordinate = new Coordinates(newColumn, newRow);
             if (isValidateCoordinate(newCoordinate)) {
                 result.add(newCoordinate);
