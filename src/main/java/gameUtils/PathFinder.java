@@ -35,7 +35,7 @@ public class PathFinder {
                 return reconstructPath(current);
             }
 
-            for (Coordinates neighbor : getNeighboursCoordinates(current)) {
+            for (Coordinates neighbor : getNeighboursCoordinates(current, typeOfFood)) {
                 if (!visitedPath.contains(neighbor)) {
                     visitedPath.add(neighbor);
                     parentsPath.put(neighbor, current);
@@ -47,12 +47,6 @@ public class PathFinder {
         return Collections.emptyList();
     }
 
-
-//    private <T extends Entity> boolean isObstacle(Coordinates current, Class<T> food) {
-//        if(gameBoard.getEntityAt(current) != null){
-//
-//        }
-//    }
 
     private LinkedList<Coordinates> reconstructPath(Coordinates goal) {
         LinkedList<Coordinates> path = new LinkedList<>();
@@ -79,16 +73,23 @@ public class PathFinder {
         };
     }
 
-    private HashSet<Coordinates> getNeighboursCoordinates(Coordinates currentCoordinates) {
+    private HashSet<Coordinates> getNeighboursCoordinates(Coordinates currentCoordinates, Class<? extends Entity> clazz) {
         HashSet<Coordinates> result = new HashSet<>();
         for (Coordinates direction : getShiftDirections()) {
             int nearColumn = currentCoordinates.column() + direction.column();
             int nearRow = currentCoordinates.row() + direction.row();
-            Coordinates newCoordinate = new Coordinates(nearColumn, nearRow);
-            if (gameBoard.isValidateCoordinate(newCoordinate)) {
-                result.add(newCoordinate);
+            Coordinates nearCoordinate = new Coordinates(nearColumn, nearRow);
+            if (isValidCell(gameBoard, nearCoordinate, clazz)) {
+                result.add(nearCoordinate);
             }
         }
         return result;
     }
+
+    private boolean isValidCell(GameBoard gameBoard, Coordinates coordinates, Class<? extends Entity> clazz){
+        return gameBoard.isValidateCoordinate(coordinates)
+                && ((gameBoard.getCoordinatesEntityMap().get(coordinates) == null) ||
+                gameBoard.getEntityAt(coordinates).getClass() == clazz);
+    }
+
 }

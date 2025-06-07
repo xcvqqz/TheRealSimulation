@@ -27,10 +27,6 @@ public class Herbivore extends Creature {
         for (Coordinates nextStep : pathToGrass) {
             if (steps <= 0) break;
             Entity entity = gameBoard.getEntityAt(nextStep);
-            if(isObstacle(entity)) {
-                steps -= 2;
-                continue;
-            }
             if (entity instanceof Grass && steps >= 1) {
                 attackFood(gameBoard, nextStep);
                 moveCreature(gameBoard, gameBoard.getCoordinates(this), nextStep);
@@ -42,12 +38,6 @@ public class Herbivore extends Creature {
         }
     }
 
-    private boolean isObstacle(Entity entity) {
-        return entity instanceof Rock
-                || entity instanceof Tree
-                || entity instanceof Predator
-                || entity instanceof Herbivore;
-    }
 
     @Override
     public void attackFood(GameBoard gameBoard, Coordinates coordinates) {
