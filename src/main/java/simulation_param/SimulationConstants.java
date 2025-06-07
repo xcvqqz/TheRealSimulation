@@ -1,4 +1,4 @@
-package gameUtils;
+package simulation_param;
 
 import java.io.IOException;
 

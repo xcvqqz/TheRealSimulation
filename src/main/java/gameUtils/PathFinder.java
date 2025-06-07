@@ -17,21 +17,15 @@ public class PathFinder {
         this.pathQueue = new ArrayDeque<>();
     }
 
-    private boolean isValidateCoordinate(Coordinates coordinates) {
-        return ((coordinates.row() >= 0 && coordinates.row() <= gameBoard.getWidth())
-                && (coordinates.column() >= 0 && coordinates.column() <= gameBoard.getLength()));
-    }
 
     public <T extends Entity> List<Coordinates> searchFood(Coordinates start, Class<T> typeOfFood) {
         pathQueue.clear();
         visitedPath.clear();
         parentsPath.clear();
 
-
         pathQueue.add(start);
         visitedPath.add(start);
         parentsPath.put(start, null);
-
 
         while (!pathQueue.isEmpty()) {
             Coordinates current = pathQueue.remove();
@@ -88,10 +82,10 @@ public class PathFinder {
     private HashSet<Coordinates> getNeighboursCoordinates(Coordinates currentCoordinates) {
         HashSet<Coordinates> result = new HashSet<>();
         for (Coordinates direction : getShiftDirections()) {
-            int newColumn = currentCoordinates.column() + direction.column();
-            int newRow = currentCoordinates.row() + direction.row();
-            Coordinates newCoordinate = new Coordinates(newColumn, newRow);
-            if (isValidateCoordinate(newCoordinate)) {
+            int nearColumn = currentCoordinates.column() + direction.column();
+            int nearRow = currentCoordinates.row() + direction.row();
+            Coordinates newCoordinate = new Coordinates(nearColumn, nearRow);
+            if (gameBoard.isValidateCoordinate(newCoordinate)) {
                 result.add(newCoordinate);
             }
         }

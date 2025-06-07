@@ -2,6 +2,7 @@ package gameUtils;
 
 
 import entity.Entity;
+import simulation_param.SimulationConstants;
 
 import java.util.*;
 
@@ -36,6 +37,16 @@ public class GameBoard{
             }
         }
         throw new IllegalArgumentException();
+    }
+
+    public boolean isValidateCoordinate(Coordinates coordinates) {
+        return ((coordinates.row() >= 0 && coordinates.row() <= getWidth())
+                && (coordinates.column() >= 0 && coordinates.column() <= getLength()));
+    }
+
+    public boolean isContains(GameBoard gameBoard, Class<? extends Entity> clazz){
+        ArrayList<Entity> entities = (ArrayList<Entity>) getCoordinatesEntityMap().values();
+        return entities.stream().anyMatch(value -> value.getClass() == clazz);
     }
 
     public Coordinates getRandomFreeCoordinates(){

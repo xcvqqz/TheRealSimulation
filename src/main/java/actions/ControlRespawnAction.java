@@ -8,7 +8,7 @@ import gameUtils.GameBoard;
 import java.util.ArrayList;
 import java.util.Map;
 
-import static gameUtils.SimulationConstants.*;
+import static simulation_param.SimulationConstants.*;
 
 public class ControlRespawnAction extends Action {
 

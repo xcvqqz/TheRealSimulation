@@ -1,5 +1,5 @@
 import gameUtils.GameBoard;
-import gameUtils.Simulation;
+import simulation.Simulation;
 
 import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;

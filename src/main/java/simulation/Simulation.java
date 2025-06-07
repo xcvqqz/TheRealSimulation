@@ -1,9 +1,12 @@
-package gameUtils;
+package simulation;
 import actions.Action;
 import actions.ControlRespawnAction;
 import actions.MoveAction;
 import actions.SpawnAction;
-import static gameUtils.SimulationConstants.*;
+import gameUtils.GameBoard;
+import gameUtils.MapConsoleRenderer;
+
+import static simulation_param.SimulationConstants.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -74,9 +77,6 @@ public class Simulation {
        simulationThread.start();
    }
 
-   private void incrementSimulationTurnCounter(){
-        simulationTurnCounter.incrementAndGet();
-   }
    private void printSimulationTurnCounter(){
        System.out.println(TURN_COUNTER_INFO_MESSAGE + simulationTurnCounter.incrementAndGet());
    }

@@ -8,7 +8,7 @@ import entity.static_object.Grass;
 import entity.static_object.Rock;
 import entity.static_object.Tree;
 import java.util.ArrayList;
-import static gameUtils.SimulationConstants.*;
+import static simulation_param.SimulationConstants.*;
 
 public class SpawnAction extends Action {
 
