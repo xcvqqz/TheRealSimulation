@@ -8,7 +8,7 @@ import gameUtils.GameBoard;
 import java.util.ArrayList;
 import java.util.Map;
 
-import static simulation_param.SimulationConstants.*;
+import static parameters.Constants.*;
 
 public class ControlRespawnAction extends Action {
 
@@ -23,14 +23,14 @@ public class ControlRespawnAction extends Action {
         if (!isEntityAvailable(Herbivore.class)) {
             Coordinates herbivoreCoords = gameBoard.getRandomFreeCoordinates();
             if (herbivoreCoords != null) {
-                gameBoard.getCoordinatesEntityMap().put(herbivoreCoords,
+                gameBoard.getEntities().put(herbivoreCoords,
                         new Herbivore(HERBIVORE_HEALTH, HERBIVORE_SPEED));
             }
         }
         if (!isEntityAvailable(Grass.class)) {
             Coordinates grassCoords = gameBoard.getRandomFreeCoordinates();
             if (grassCoords != null) {
-                gameBoard.getCoordinatesEntityMap().put(grassCoords,
+                gameBoard.getEntities().put(grassCoords,
                         new Grass());
             }
         }
@@ -38,7 +38,7 @@ public class ControlRespawnAction extends Action {
 
     private <T extends Entity> boolean isEntityAvailable(Class<T> typeOfEntity) {
         ArrayList<T> entityList = new ArrayList<>();
-        for (Map.Entry<Coordinates, Entity> entity : gameBoard.getCoordinatesEntityMap().entrySet()) {
+        for (Map.Entry<Coordinates, Entity> entity : gameBoard.getEntities().entrySet()) {
             if (typeOfEntity.isInstance(entity.getValue())) {
                 entityList.add((T) entity.getValue());
             }

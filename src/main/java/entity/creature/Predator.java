@@ -4,9 +4,7 @@ import gameUtils.Coordinates;
 import entity.Entity;
 import gameUtils.GameBoard;
 import gameUtils.PathFinder;
-import entity.static_object.Grass;
-import entity.static_object.Rock;
-import entity.static_object.Tree;
+
 import java.util.List;
 
 public class Predator extends Creature {
@@ -55,14 +53,14 @@ public class Predator extends Creature {
         if (herbivore == null) return;
         herbivore.setHealth(herbivore.getHealth() - getAttackPower());
         if (herbivore.getHealth() <= 0) {
-            gameBoard.getCoordinatesEntityMap().remove(coordinates);
+            gameBoard.getEntities().remove(coordinates);
         }
     }
 
     @Override
     public void moveCreature(GameBoard gameBoard, Coordinates from, Coordinates to){
-        gameBoard.getCoordinatesEntityMap().remove(from);
-        gameBoard.getCoordinatesEntityMap().put(to, this);
+        gameBoard.getEntities().remove(from);
+        gameBoard.getEntities().put(to, this);
     }
 
 }

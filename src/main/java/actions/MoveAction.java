@@ -33,7 +33,7 @@ public class MoveAction extends Action {
 
     private Set<Creature> getAllCreature(){
         Set<Creature> allCreatures = new HashSet<>();
-        for(Map.Entry<Coordinates, Entity> entry : gameBoard.getCoordinatesEntityMap().entrySet()){
+        for(Map.Entry<Coordinates, Entity> entry : gameBoard.getEntities().entrySet()){
             Entity entity = entry.getValue();
             if(entity instanceof Creature){
                 allCreatures.add((Creature) entity);

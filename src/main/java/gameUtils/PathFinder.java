@@ -17,7 +17,6 @@ public class PathFinder {
         this.pathQueue = new ArrayDeque<>();
     }
 
-
     public <T extends Entity> List<Coordinates> searchFood(Coordinates start, Class<T> typeOfFood) {
         pathQueue.clear();
         visitedPath.clear();
@@ -43,10 +42,8 @@ public class PathFinder {
                 }
             }
         }
-
         return Collections.emptyList();
     }
-
 
     private LinkedList<Coordinates> reconstructPath(Coordinates goal) {
         LinkedList<Coordinates> path = new LinkedList<>();
@@ -88,7 +85,7 @@ public class PathFinder {
 
     private boolean isValidCell(GameBoard gameBoard, Coordinates coordinates, Class<? extends Entity> clazz){
         return gameBoard.isValidateCoordinate(coordinates)
-                && ((gameBoard.getCoordinatesEntityMap().get(coordinates) == null) ||
+                && ((gameBoard.getEntities().get(coordinates) == null) ||
                 gameBoard.getEntityAt(coordinates).getClass() == clazz);
     }
 

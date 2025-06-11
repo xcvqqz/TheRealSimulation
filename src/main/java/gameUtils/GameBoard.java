@@ -2,22 +2,22 @@ package gameUtils;
 
 
 import entity.Entity;
-import simulation_param.SimulationConstants;
+import parameters.Constants;
 
 import java.util.*;
 
 public class GameBoard{
-    private final HashMap<Coordinates, Entity> coordinatesEntityMap = new HashMap<>();
+    private final HashMap<Coordinates, Entity> entities = new HashMap<>();
     private final int length;
     private final int width;
 
     public GameBoard() {
-        this.length = SimulationConstants.GAMEBOARD_LENGTH;
-        this.width = SimulationConstants.GAMEBOARD_WIDTH;
+        this.length = Constants.GAMEBOARD_LENGTH;
+        this.width = Constants.GAMEBOARD_WIDTH;
     }
 
-    public HashMap<Coordinates, Entity> getCoordinatesEntityMap() {
-        return coordinatesEntityMap;
+    public HashMap<Coordinates, Entity> getEntities() {
+        return entities;
     }
     public int getLength() {
         return length;
@@ -27,11 +27,11 @@ public class GameBoard{
     }
 
     public Entity getEntityAt(Coordinates coordinates) {
-        return getCoordinatesEntityMap().get(coordinates);
+        return getEntities().get(coordinates);
     }
 
     public Coordinates getCoordinates (Entity entity){
-        for(Map.Entry<Coordinates, Entity> entry :  coordinatesEntityMap.entrySet()){
+        for(Map.Entry<Coordinates, Entity> entry :  entities.entrySet()){
             if(entry.getValue().equals(entity)){
                 return  entry.getKey();
             }
@@ -44,17 +44,13 @@ public class GameBoard{
                 && (coordinates.column() >= 0 && coordinates.column() <= getLength()));
     }
 
-    public boolean isContains(GameBoard gameBoard, Class<? extends Entity> clazz){
-        ArrayList<Entity> entities = (ArrayList<Entity>) getCoordinatesEntityMap().values();
-        return entities.stream().anyMatch(value -> value.getClass() == clazz);
-    }
 
     public Coordinates getRandomFreeCoordinates(){
         List<Coordinates> freeCoordinates = new ArrayList<>();
         for(int column = 0; column < getLength()+1; column++){
             for(int row = 0; row < getWidth()+1; row++) {
                 Coordinates current = new Coordinates(column, row);
-                if(!getCoordinatesEntityMap().containsKey(current)){
+                if(!getEntities().containsKey(current)){
                     freeCoordinates.add(current);
                 }
             }

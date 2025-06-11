@@ -6,7 +6,7 @@ import actions.SpawnAction;
 import gameUtils.GameBoard;
 import gameUtils.MapConsoleRenderer;
 
-import static simulation_param.SimulationConstants.*;
+import static parameters.Constants.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;

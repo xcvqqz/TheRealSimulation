@@ -1,10 +1,10 @@
-package simulation_param;
+package parameters;
 
 import java.io.IOException;
 
-public final class SimulationConstants {
+public final class Constants {
 
-    private SimulationConstants() throws IOException {
+    private Constants() throws IOException {
         throw new UnsupportedOperationException("Util ity class");
     }
     public static final String ANSI_RESET = "\u001B[0m";

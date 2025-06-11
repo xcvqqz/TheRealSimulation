@@ -8,7 +8,7 @@ import entity.static_object.Grass;
 import entity.static_object.Rock;
 import entity.static_object.Tree;
 import java.util.ArrayList;
-import static simulation_param.SimulationConstants.*;
+import static parameters.Constants.*;
 
 public class SpawnAction extends Action {
 
@@ -29,7 +29,7 @@ public class SpawnAction extends Action {
     private void addEntityOnGameBoard(){
         for(int i = 0; i < entityList.size(); i++){
             Coordinates newCoordinates = gameBoard.getRandomFreeCoordinates();
-            gameBoard.getCoordinatesEntityMap().put(newCoordinates, entityList.get(i));
+            gameBoard.getEntities().put(newCoordinates, entityList.get(i));
         }
     }
 

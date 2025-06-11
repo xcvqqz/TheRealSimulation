@@ -29,7 +29,7 @@ public class MapConsoleRenderer {
     }
 
     private String colorizeAndGetSprite(Coordinates coordinates) {
-        Entity entity = gameBoard.getCoordinatesEntityMap().get(coordinates);
+        Entity entity = gameBoard.getEntities().get(coordinates);
         if (entity instanceof Herbivore) {
             return HERBIVORE;}
         if (entity instanceof Grass) {
