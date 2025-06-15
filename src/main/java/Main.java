@@ -10,7 +10,6 @@ public class Main {
         System.setOut(new PrintStream(System.out, true, StandardCharsets.UTF_8));
         Simulation simulation = new Simulation(new GameBoard());
         simulation.processUserInput();
-
     }
 }
 

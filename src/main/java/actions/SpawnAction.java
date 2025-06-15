@@ -35,12 +35,18 @@ public class SpawnAction extends Action {
 
     private void createEntityList(){
         entityList.add(createEntity(Predator.class));
-        entityList.add(createEntity(Herbivore.class));
+        entityList.add(createEntity(Grass.class));
+        entityList.add(createEntity(Grass.class));
+        entityList.add(createEntity(Grass.class));
+        entityList.add(createEntity(Grass.class));
         entityList.add(createEntity(Grass.class));
         entityList.add(createEntity(Tree.class));
+        entityList.add(createEntity(Tree.class));
+        entityList.add(createEntity(Rock.class));
         entityList.add(createEntity(Rock.class));
         entityList.add(createEntity(Herbivore.class));
-        entityList.add(createEntity(Grass.class));
+        entityList.add(createEntity(Herbivore.class));
+        entityList.add(createEntity(Herbivore.class));
     }
 
      private <T extends Entity> Entity createEntity(Class<T> typeOfEntity) {
