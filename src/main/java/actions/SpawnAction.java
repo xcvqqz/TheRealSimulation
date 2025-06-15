@@ -40,8 +40,16 @@ public class SpawnAction extends Action {
         entityList.add(createEntity(Grass.class));
         entityList.add(createEntity(Grass.class));
         entityList.add(createEntity(Grass.class));
+        entityList.add(createEntity(Grass.class));
+        entityList.add(createEntity(Grass.class));
         entityList.add(createEntity(Tree.class));
         entityList.add(createEntity(Tree.class));
+        entityList.add(createEntity(Tree.class));
+        entityList.add(createEntity(Tree.class));
+        entityList.add(createEntity(Rock.class));
+        entityList.add(createEntity(Rock.class));
+        entityList.add(createEntity(Rock.class));
+        entityList.add(createEntity(Rock.class));
         entityList.add(createEntity(Rock.class));
         entityList.add(createEntity(Rock.class));
         entityList.add(createEntity(Herbivore.class));
