@@ -52,14 +52,12 @@ public class Simulation {
 
     private void renderSimulation() {
         mapConsoleRenderer.render();
-        System.out.println("----------------------------------");
+        System.out.println(RENDERER_VISUAL_LINE);
     }
 
     private void printSimulationTurnCounter() {
-        System.out.println("Turn: " + simulationTurnCounter.incrementAndGet());
+        System.out.println(TURN_COUNTER_INFO_MESSAGE_ONE + simulationTurnCounter.incrementAndGet() + TURN_COUNTER_INFO_MESSAGE_TWO);
     }
-
-
     public void startSimulation() {
         if (isRunning.get()) {
             return;
@@ -92,7 +90,7 @@ public class Simulation {
             return;
         }
         isPaused.set(true);
-        System.out.println("Simulation paused");
+        System.out.println(PAUSED_INFO_MESSAGE);
     }
 
     public void resumeSimulation() {
@@ -100,18 +98,19 @@ public class Simulation {
             return;
         }
         isPaused.set(false);
-        System.out.println("Simulation resumed");
+        System.out.println(RESUMED_INFO_MESSAGE);
     }
 
     public void stopSimulation() {
         isRunning.set(false);
         isPaused.set(false);
         resetSimulation();
+        if (simulationThread != null) {
+            simulationThread.interrupt();
+        }
 
-        System.out.println("Simulation stopped");
-        System.out.println("To restart the game, you need to type \"start\"");
+        System.out.println(STOPPED_INFO_MESSAGE + "\n" + RESTART_INFO_MESSAGE);
     }
-
 
     public void exitSimulation() {
         isRunning.set(false);
@@ -119,7 +118,7 @@ public class Simulation {
         if (simulationThread != null) {
             simulationThread.interrupt();
         }
-        System.out.println("Simulation end. GoodBye!");
+        System.out.println(EXIT_INFO_MESSAGE);
     }
 
     private void resetSimulation(){
@@ -129,36 +128,34 @@ public class Simulation {
         simulationTurnCounter.set(0);
     }
 
-
     public void processUserInput() {
 
-            System.out.println("\nCommands: [start] [pause] [resume] [stop]");
-            System.out.print("Enter command: ");
+            System.out.println(START_MENU_INFO_MESSAGE);
 
             while (true) {
                 String command = scanner.nextLine().trim().toLowerCase();
 
                 switch (command) {
-                    case "start":
+                    case START:
                         startSimulation();
                         break;
-                    case "pause":
+                    case PAUSE:
                         pauseSimulation();
                         break;
-                    case "resume":
+                    case RESUME:
                         resumeSimulation();
                         break;
-                    case "stop":
+                    case STOP:
                         stopSimulation();
                         processUserInput();
                         break;
-                    case "exit":
+                    case EXIT:
                         exitSimulation();
                         scanner.close();
                         System.exit(0);
                         return;
                     default:
-                        System.out.println("Unknown command!");
+                        System.out.println(UNKNOWN_COMMAND_MESSAGE);
                 }
             }
         }
