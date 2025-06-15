@@ -106,12 +106,29 @@ public class Simulation {
     public void stopSimulation() {
         isRunning.set(false);
         isPaused.set(false);
+        resetSimulation();
+
+        System.out.println("Simulation stopped");
+        System.out.println("To restart the game, you need to type \"start\"");
+    }
+
+
+    public void exitSimulation() {
+        isRunning.set(false);
+        isPaused.set(false);
         if (simulationThread != null) {
             simulationThread.interrupt();
         }
-
-        System.out.println("Simulation stopped");
+        System.out.println("Simulation end. GoodBye!");
     }
+
+    private void resetSimulation(){
+        gameBoard.getEntities().clear();
+        turnActions.clear();
+        initActions.clear();
+        simulationTurnCounter.set(0);
+    }
+
 
     public void processUserInput() {
 
@@ -133,6 +150,12 @@ public class Simulation {
                         break;
                     case "stop":
                         stopSimulation();
+                        processUserInput();
+                        break;
+                    case "exit":
+                        exitSimulation();
+                        scanner.close();
+                        System.exit(0);
                         return;
                     default:
                         System.out.println("Unknown command!");
