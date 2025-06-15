@@ -1,5 +1,6 @@
 # Simulation
-![img.png](img.png)
+![renderSimulation](https://github.com/user-attachments/assets/2e84a600-4f28-4d92-ac0e-af9b06ecf7a7)
+
 
 ---
 Simulation - пошаговая симуляция 2D мира, населённого травоядынми 
