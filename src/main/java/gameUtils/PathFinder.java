@@ -88,5 +88,4 @@ public class PathFinder {
                 && ((gameBoard.getEntities().get(coordinates) == null) ||
                 gameBoard.getEntityAt(coordinates).getClass() == clazz);
     }
-
 }

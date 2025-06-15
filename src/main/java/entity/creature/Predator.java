@@ -45,8 +45,6 @@ public class Predator extends Creature {
         }
     }
 
-
-
     @Override
     public void attackFood(GameBoard gameBoard, Coordinates coordinates) {
         Herbivore herbivore = (Herbivore) gameBoard.getEntityAt(coordinates);
@@ -62,5 +60,4 @@ public class Predator extends Creature {
         gameBoard.getEntities().remove(from);
         gameBoard.getEntities().put(to, this);
     }
-
 }
